@@ -19,6 +19,10 @@
   --inside-app-bg-color: #ebffee;
   --chat-panel-green-bg-color: #dff3e2;
   --active-hover-green-bg-color: #b8ffbf;
+
+  --small-border-radius: 10px;
+  --medium-border-radius: 30px;
+  --large-border-radius: 50px;
 }
 
 @media (prefers-color-scheme: dark) {
@@ -29,4 +33,5 @@
 }
 
 body {
+  font-family: "montserrat", sans-serif;
 }
