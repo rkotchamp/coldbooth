@@ -3,6 +3,7 @@
 @tailwind utilities;
 
 :root {
+  /* colors */
   --background: #ffffff;
   --foreground: #171717;
   --primary-green-color: #4b9595;
@@ -20,9 +21,30 @@
   --chat-panel-green-bg-color: #dff3e2;
   --active-hover-green-bg-color: #b8ffbf;
 
+  /* border radius */
   --small-border-radius: 10px;
   --medium-border-radius: 30px;
   --large-border-radius: 50px;
+
+  /* font size */
+  --smallest-font-size: 10px;
+  --small-font-size: 12px;
+  --normal-font-size: 16px;
+  --medium-font-size: 20px;
+  --lower-medium-font-size: 24px;
+  --upper-medium-font-size: 30px;
+  --large-font-size: 35px;
+  --lower-large-font-size: 40px;
+  --upper-large-font-size: 50px;
+  --small-extreme-large-font-size: 70px;
+  --large-extreme-font-size: 80px;
+
+  /* font weight */
+  --bold-font-weight: 700;
+  --lower-mid-font-weight: 500;
+  --medium-font-weight: 600;
+  --normal-font-weight: 400;
+  --extrabold-font-weight: 800;
 }
 
 @media (prefers-color-scheme: dark) {
@@ -33,5 +55,4 @@
 }
 
 body {
-  font-family: "montserrat", sans-serif;
 }
