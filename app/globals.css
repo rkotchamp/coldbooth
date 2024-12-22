@@ -1,0 +1,32 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --background: #ffffff;
+  --foreground: #171717;
+  --primary-green-color: #4b9595;
+  --cta-green-color: #32cd32;
+  --light-mint-green-color: #ebffee;
+  --gray-review-color: #edebeb;
+  --gray-light-bg-color: #d9d9d9;
+  --text-black-color: #0d1117;
+  --warning-color: #ff6f61;
+  --gray-dark-color: #959595;
+  --gray-light-border-color: #c4c4c4;
+  --gray-white-color: #f8f9fa;
+  --entire-window-bg-color: #f6fff7;
+  --inside-app-bg-color: #ebffee;
+  --chat-panel-green-bg-color: #dff3e2;
+  --active-hover-green-bg-color: #b8ffbf;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --background: #0a0a0a;
+    --foreground: #ededed;
+  }
+}
+
+body {
+}
