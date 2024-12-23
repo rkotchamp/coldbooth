@@ -20,52 +20,75 @@ const signUpSchema = z.object({
     }),
 });
 
-export default function Form() {
+export default function Form({ onSubmit }) {
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm({ resolver: zodResolver(signUpSchema) });
   return (
-    <div className=" w-[80%] h-[60%] flex flex-col items-center justify-center">
-      <form className="w-[50%] h-[60%] flex flex-col items-center justify-center gap-[20px] mb-[30px]">
-        <div className="w-full  flex flex-col gap-3">
+    <div className="flex h-[60%] w-[80%] flex-col items-center justify-center">
+      <form
+        onSubmit={handleSubmit(onSubmit)}
+        className="mb-[30px] flex h-[60%] w-[50%] flex-col items-center justify-center gap-[20px]"
+      >
+        <div className="flex w-full flex-col gap-3">
           <label htmlFor="full-nam ">
             Full Name <span className="text-[--warning-color]">*</span>
           </label>
           <input
             type="text"
             id="full-name"
-            className="w-full border-[--gray-light-border-color] rounded-[--small-border-radius] h-[60px] border-[1px] p-[10px] text-[--text-black-color] font-medium bg-[--gray-white-color]"
+            className="h-[60px] w-full rounded-[--small-border-radius] border-[1px] border-[--gray-light-border-color] bg-[--gray-white-color] p-[10px] font-medium text-[--text-black-color]"
             placeholder="Jerry quinn"
+            {...register("fullName")}
           />
+          {errors.fullName && (
+            <p className="text-[--warning-color]">{errors.fullName.message}</p>
+          )}
         </div>
-        <div className="w-full  flex flex-col gap-3">
+        <div className="flex w-full flex-col gap-3">
           <label htmlFor="email">
             Email <span className="text-[--warning-color]">*</span>
           </label>
           <input
             type="email"
             id="email"
-            className="w-full border-[--gray-light-border-color] rounded-[--small-border-radius] h-[60px] border-[1px] p-[10px] text-[--text-black-color] font-medium bg-[--gray-white-color]"
+            className="h-[60px] w-full rounded-[--small-border-radius] border-[1px] border-[--gray-light-border-color] bg-[--gray-white-color] p-[10px] font-medium text-[--text-black-color]"
             placeholder="jamie@example.com"
+            {...register("email")}
           />
+          {errors.email && (
+            <p className="text-[--warning-color]">{errors.email.message}</p>
+          )}
         </div>
-        <div className="w-full  flex flex-col gap-3">
+        <div className="flex w-full flex-col gap-3">
           <label htmlFor="password">
             Password <span className="text-[--warning-color]">*</span>
           </label>
           <input
             type="password"
             id="password"
-            className="w-full border-[--gray-light-border-color] rounded-[--small-border-radius] border-[1px] h-[60px] p-[10px] text-[--text-black-color] font-medium bg-[--gray-white-color]"
+            className="h-[60px] w-full rounded-[--small-border-radius] border-[1px] border-[--gray-light-border-color] bg-[--gray-white-color] p-[10px] font-medium text-[--text-black-color]"
             placeholder="********"
+            {...register("password")}
           />
+          {errors.password && (
+            <p className="text-[--warning-color]">{errors.password.message}</p>
+          )}
         </div>
-        <div className="w-full ">
-          <button className="bg-[--cta-green-color] text-[--gray-white-color] font-[--medium-font-weight] w-full p-[10px] rounded-[--small-border-radius]">
+        <div className="w-full">
+          <button
+            type="submit"
+            className="w-full rounded-[--small-border-radius] bg-[--cta-green-color] p-[10px] font-[--medium-font-weight] text-[--gray-white-color]"
+          >
             Submit Now
           </button>
         </div>
       </form>
-      <div className="w-full flex flex-col items-center justify-center gap-[10px]">
+      <div className="flex w-full flex-col items-center justify-center gap-[10px]">
         <p>OR</p>
-        <button className="flex bg-[--gray-review-color] items-center justify-center w-[50%] p-[10px] rounded-[--small-border-radius]">
+        <button className="flex w-[50%] items-center justify-center rounded-[--small-border-radius] bg-[--gray-review-color] p-[10px]">
           <FcGoogle /> Sign-Up with Google
         </button>
       </div>
