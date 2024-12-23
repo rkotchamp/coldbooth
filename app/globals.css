@@ -27,17 +27,17 @@
   --large-border-radius: 50px;
 
   /* font size */
-  --smallest-font-size: 10px;
-  --small-font-size: 12px;
-  --normal-font-size: 16px;
-  --medium-font-size: 20px;
-  --lower-medium-font-size: 24px;
-  --upper-medium-font-size: 30px;
-  --large-font-size: 35px;
-  --lower-large-font-size: 40px;
-  --upper-large-font-size: 50px;
-  --small-extreme-large-font-size: 70px;
-  --large-extreme-font-size: 80px;
+  --lowest-smallest-smallFont: 10px;
+  --low-small-smallFont: 12px;
+  --reg-normal-normFont: 16px;
+  --mid-medium-midFont: 20px;
+  --lower-midFont: 24px;
+  --upper-midFont: 30px;
+  --large-larFont: 35px;
+  --lower-larFont: 40px;
+  --upper-larFont: 50px;
+  --small-extreme-larFont: 70px;
+  --large-extreme-larFont: 80px;
 
   /* font weight */
   --bold-font-weight: 700;
@@ -45,6 +45,14 @@
   --medium-font-weight: 600;
   --normal-font-weight: 400;
   --extrabold-font-weight: 800;
+}
+
+@layer components {
+  .font-bold-headers {
+    font-weight: var(--bold-font-weight);
+    font-size: var(--large-larFont);
+    color: var(--text-black-color);
+  }
 }
 
 @media (prefers-color-scheme: dark) {
