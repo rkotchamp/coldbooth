@@ -3,6 +3,7 @@ import { useForm } from "react-hook-form";
 import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { FcGoogle } from "react-icons/fc";
+import Loading from "@/app/auth/signup/loading";
 
 const signUpSchema = z.object({
   fullName: z
@@ -20,16 +21,20 @@ const signUpSchema = z.object({
     }),
 });
 
-export default function Form({ onSubmit }) {
+export default function Form({ onSubmit, isLoading }) {
   const {
     register,
     handleSubmit,
     formState: { errors },
+    reset,
   } = useForm({ resolver: zodResolver(signUpSchema) });
 
-  const submitHandler = (data) => {
+  const submitHandler = async (data) => {
     if (onSubmit) {
-      onSubmit(data);
+      const success = await onSubmit(data);
+      if (success) {
+        reset();
+      }
     }
   };
   return (
@@ -88,7 +93,7 @@ export default function Form({ onSubmit }) {
             type="submit"
             className="w-full rounded-[--small-border-radius] bg-[--cta-green-color] p-[10px] font-[--medium-font-weight] text-[--gray-white-color]"
           >
-            Submit Now
+            {isLoading ? <Loading /> : "Submit Now"}
           </button>
         </div>
       </form>
