@@ -26,10 +26,16 @@ export default function Form({ onSubmit }) {
     handleSubmit,
     formState: { errors },
   } = useForm({ resolver: zodResolver(signUpSchema) });
+
+  const submitHandler = (data) => {
+    if (onSubmit) {
+      onSubmit(data);
+    }
+  };
   return (
     <div className="flex h-[60%] w-[80%] flex-col items-center justify-center">
       <form
-        onSubmit={handleSubmit(onSubmit)}
+        onSubmit={handleSubmit(submitHandler)}
         className="mb-[30px] flex h-[60%] w-[50%] flex-col items-center justify-center gap-[20px]"
       >
         <div className="flex w-full flex-col gap-3">
