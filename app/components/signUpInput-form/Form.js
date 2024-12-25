@@ -21,7 +21,7 @@ const signUpSchema = z.object({
     }),
 });
 
-export default function Form({ onSubmit, isLoading }) {
+export default function Form({ onSubmit, isLoading, isError }) {
   const {
     register,
     handleSubmit,
@@ -30,13 +30,18 @@ export default function Form({ onSubmit, isLoading }) {
   } = useForm({ resolver: zodResolver(signUpSchema) });
 
   const submitHandler = async (data) => {
-    if (onSubmit) {
-      const success = await onSubmit(data);
-      if (success) {
-        reset();
+    try {
+      if (onSubmit) {
+        const success = await onSubmit(data);
+        if (success) {
+          reset();
+        }
       }
+    } catch (error) {
+      console.error("Signup error:", error);
     }
   };
+
   return (
     <div className="flex h-[60%] w-[80%] flex-col items-center justify-center">
       <form
@@ -44,12 +49,12 @@ export default function Form({ onSubmit, isLoading }) {
         className="mb-[30px] flex h-[60%] w-[50%] flex-col items-center justify-center gap-[20px]"
       >
         <div className="flex w-full flex-col gap-3">
-          <label htmlFor="full-nam ">
+          <label htmlFor="fullName">
             Full Name <span className="text-[--warning-color]">*</span>
           </label>
           <input
             type="text"
-            id="full-name"
+            id="fullName"
             className="h-[60px] w-full rounded-[--small-border-radius] border-[1px] border-[--gray-light-border-color] bg-[--gray-white-color] p-[10px] font-medium text-[--text-black-color]"
             placeholder="Jerry quinn"
             {...register("fullName")}
@@ -58,6 +63,7 @@ export default function Form({ onSubmit, isLoading }) {
             <p className="text-[--warning-color]">{errors.fullName.message}</p>
           )}
         </div>
+
         <div className="flex w-full flex-col gap-3">
           <label htmlFor="email">
             Email <span className="text-[--warning-color]">*</span>
@@ -73,6 +79,7 @@ export default function Form({ onSubmit, isLoading }) {
             <p className="text-[--warning-color]">{errors.email.message}</p>
           )}
         </div>
+
         <div className="flex w-full flex-col gap-3">
           <label htmlFor="password">
             Password <span className="text-[--warning-color]">*</span>
@@ -88,6 +95,7 @@ export default function Form({ onSubmit, isLoading }) {
             <p className="text-[--warning-color]">{errors.password.message}</p>
           )}
         </div>
+
         <div className="w-full">
           <button
             type="submit"
@@ -97,12 +105,14 @@ export default function Form({ onSubmit, isLoading }) {
           </button>
         </div>
       </form>
+
       <div className="flex w-full flex-col items-center justify-center gap-[10px]">
         <p>OR</p>
         <button className="flex w-[50%] items-center justify-center rounded-[--small-border-radius] bg-[--gray-review-color] p-[10px]">
           <FcGoogle /> Sign-Up with Google
         </button>
       </div>
+      {isError && <p className="text-[--warning-color]">{isError}</p>}
     </div>
   );
 }

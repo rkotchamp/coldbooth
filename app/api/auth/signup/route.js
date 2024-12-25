@@ -11,9 +11,10 @@ export async function POST(request) {
     const db = client.db(process.env.MONGODB_DB);
 
     const existingUser = await db.collection("users").findOne({ email });
+
     if (existingUser) {
       return NextResponse.json(
-        { message: "User already exists" },
+        { message: "User already exists, do you want to login?" },
         { status: 400 },
       );
     }
@@ -36,7 +37,7 @@ export async function POST(request) {
       throw new Error("Failed to insert user");
     }
 
-    const token = signJwtToken({
+    const token = await signJwtToken({
       userId: result.insertedId.toString(),
       email: newUser.email,
     });

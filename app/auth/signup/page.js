@@ -1,10 +1,12 @@
 "use client";
 import { useState } from "react";
+import { useRouter } from "next/navigation";
+import Link from "next/link";
 import BackArrow from "@/app/components/backArrow/BackArrow";
 import Form from "@/app/components/signUpInput-form/Form";
-import Loading from "./loading";
 
 export default function Signup() {
+  const router = useRouter();
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState("");
 
@@ -12,6 +14,7 @@ export default function Signup() {
     try {
       setIsLoading(true);
       setError("");
+
       const response = await fetch("/api/auth/signup", {
         method: "POST",
         headers: {
@@ -21,14 +24,17 @@ export default function Signup() {
       });
 
       const result = await response.json();
+
       if (response.ok) {
-        console.log(result.message);
+        router.push("/auth/login");
         return true;
       } else {
-        setError("Signup failed" || result.error);
+        setError(result.message);
+        return false;
       }
     } catch (error) {
-      console.error("Signup error:", error);
+      setError("An unexpected error occurred");
+      return false;
     } finally {
       setTimeout(() => {
         setIsLoading(false);
@@ -40,7 +46,13 @@ export default function Signup() {
     <main className="flex h-screen flex-col items-center justify-center bg-[]">
       <BackArrow />
       <h1 className="font-bold-headers">Sign-Up to Cold Booth</h1>
-      <Form onSubmit={onSubmit} isLoading={isLoading} />
+      <Form onSubmit={onSubmit} isLoading={isLoading} isError={error} />
+      <div className="flex items-center justify-center gap-2">
+        <p>Already have an account?</p>
+        <Link href="/auth/login" className="text-[--cta-green-color]">
+          Login
+        </Link>
+      </div>
     </main>
   );
 }
