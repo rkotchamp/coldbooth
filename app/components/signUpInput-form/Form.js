@@ -43,7 +43,7 @@ export default function Form({ onSubmit, isLoading, isError }) {
   };
 
   return (
-    <div className="flex h-[60%] w-[80%] flex-col items-center justify-center">
+    <div className="flex h-[60%] w-[80%] flex-col items-center justify-center bg-red-200 sm:w-full">
       <form
         onSubmit={handleSubmit(submitHandler)}
         className="mb-[30px] flex h-[60%] w-[50%] flex-col items-center justify-center gap-[20px]"

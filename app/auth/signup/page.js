@@ -43,7 +43,7 @@ export default function Signup() {
   };
 
   return (
-    <main className="flex h-screen flex-col items-center justify-center bg-[]">
+    <main className="flex h-screen flex-col items-center justify-center">
       <BackArrow />
       <h1 className="font-bold-headers">Sign-Up to Cold Booth</h1>
       <Form onSubmit={onSubmit} isLoading={isLoading} isError={error} />
