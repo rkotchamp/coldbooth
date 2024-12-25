@@ -50,8 +50,38 @@
 @layer components {
   .font-bold-headers {
     font-weight: var(--bold-font-weight);
-    font-size: var(--large-larFont);
+    font-size: var(--mid-medium-midFont);
     color: var(--text-black-color);
+  }
+
+  @media (min-width: 320px) {
+    .font-bold-headers {
+      font-size: var(--upper-midFont);
+    }
+  }
+
+  @media (min-width: 640px) {
+    .font-bold-headers {
+      font-size: var(--large-larFont);
+    }
+  }
+
+  @media (min-width: 768px) {
+    .font-bold-headers {
+      font-size: var(--large-larFont);
+    }
+  }
+
+  @media (min-width: 1024px) {
+    .font-bold-headers {
+      font-size: var(--large-larFont);
+    }
+  }
+
+  @media (min-width: 1280px) {
+    .font-bold-headers {
+      font-size: var(--large-larFont);
+    }
   }
 }
 

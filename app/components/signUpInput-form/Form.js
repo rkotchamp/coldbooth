@@ -43,10 +43,10 @@ export default function Form({ onSubmit, isLoading, isError }) {
   };
 
   return (
-    <div className="flex h-[60%] w-[80%] flex-col items-center justify-center bg-red-200 sm:w-full">
+    <div className="xs:w-full lg:w-[6 0%] flex h-[60%] w-[80%] flex-col items-center justify-center sm:w-[80%] md:w-[80%]">
       <form
         onSubmit={handleSubmit(submitHandler)}
-        className="mb-[30px] flex h-[60%] w-[50%] flex-col items-center justify-center gap-[20px]"
+        className="xs:w-[90%] mb-[30px] flex h-[60%] w-[50%] flex-col items-center justify-center gap-[20px] sm:w-[80%] md:w-[50%] lg:w-[50%]"
       >
         <div className="flex w-full flex-col gap-3">
           <label htmlFor="fullName">
@@ -55,7 +55,7 @@ export default function Form({ onSubmit, isLoading, isError }) {
           <input
             type="text"
             id="fullName"
-            className="h-[60px] w-full rounded-[--small-border-radius] border-[1px] border-[--gray-light-border-color] bg-[--gray-white-color] p-[10px] font-medium text-[--text-black-color]"
+            className="xs:h-[50px] h-[60px] w-full rounded-[--small-border-radius] border-[1px] border-[--gray-light-border-color] bg-[--gray-white-color] p-[10px] font-medium text-[--text-black-color] sm:h-[55px] md:h-[60px] lg:h-[60px]"
             placeholder="Jerry quinn"
             {...register("fullName")}
           />
@@ -71,7 +71,7 @@ export default function Form({ onSubmit, isLoading, isError }) {
           <input
             type="email"
             id="email"
-            className="h-[60px] w-full rounded-[--small-border-radius] border-[1px] border-[--gray-light-border-color] bg-[--gray-white-color] p-[10px] font-medium text-[--text-black-color]"
+            className="xs:h-[50px] w-full rounded-[--small-border-radius] border-[1px] border-[--gray-light-border-color] bg-[--gray-white-color] p-[10px] font-medium text-[--text-black-color] sm:h-[55px] md:h-[60px] lg:h-[60px]"
             placeholder="jamie@example.com"
             {...register("email")}
           />
@@ -87,7 +87,7 @@ export default function Form({ onSubmit, isLoading, isError }) {
           <input
             type="password"
             id="password"
-            className="h-[60px] w-full rounded-[--small-border-radius] border-[1px] border-[--gray-light-border-color] bg-[--gray-white-color] p-[10px] font-medium text-[--text-black-color]"
+            className="xs:h-[50px] w-full rounded-[--small-border-radius] border-[1px] border-[--gray-light-border-color] bg-[--gray-white-color] p-[10px] font-medium text-[--text-black-color] sm:h-[55px] md:h-[60px] lg:h-[60px]"
             placeholder="********"
             {...register("password")}
           />
@@ -108,7 +108,7 @@ export default function Form({ onSubmit, isLoading, isError }) {
 
       <div className="flex w-full flex-col items-center justify-center gap-[10px]">
         <p>OR</p>
-        <button className="flex w-[50%] items-center justify-center rounded-[--small-border-radius] bg-[--gray-review-color] p-[10px]">
+        <button className="xs:w-[90%] flex w-[50%] items-center justify-center rounded-[--small-border-radius] bg-[--gray-review-color] p-[10px] sm:w-[80%] md:w-[50%] lg:w-[50%]">
           <FcGoogle /> Sign-Up with Google
         </button>
       </div>
