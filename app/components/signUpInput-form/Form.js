@@ -45,11 +45,16 @@ export default function Form({ onSubmit, isLoading, isError }) {
 
   const handleGoogleSignIn = async () => {
     try {
-      await signIn("google", {
-        callbackUrl: "/dashboard", // Redirect after successful sign in
+      const result = await signIn("google", {
+        callbackUrl: "/dashboard",
+        redirect: true,
       });
+      if (result?.error) {
+        setError("Google sign-in error:", result.error);
+      }
     } catch (error) {
-      console.error("Google sign in error:", error);
+      console.error("Google sign-in error:", error);
+      setError("An unexpected error occurred");
     }
   };
 
