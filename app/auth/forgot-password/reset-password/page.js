@@ -3,9 +3,9 @@ import { useState } from "react";
 import { useRouter } from "next/navigation";
 import Link from "next/link";
 import BackArrow from "@/app/components/backArrow/BackArrow";
-import Login from "@/app/components/login/Login";
+import ResetPassword from "@/app/components/forgotPassword/Reset/ResetPassword";
 
-export default function LoginPage() {
+export default function ResetPasswordPage() {
   const router = useRouter();
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState("");
@@ -15,7 +15,7 @@ export default function LoginPage() {
       setIsLoading(true);
       setError("");
 
-      const response = await fetch("/api/auth/login", {
+      const response = await fetch("/api/auth/forgot-password", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -30,8 +30,8 @@ export default function LoginPage() {
         return false;
       }
 
-      localStorage.setItem("token", result.token);
-      router.push("/dashboard");
+      alert("Password reset email sent");
+      router.push("/auth/login");
       return true;
     } catch (error) {
       setError("An unexpected error occurred");
@@ -46,31 +46,14 @@ export default function LoginPage() {
   return (
     <main className="flex h-screen flex-col items-center justify-center">
       <BackArrow />
-      <h1 className="font-bold-headers">Login to Cold Booth</h1>
-      <Login
+      <h1 className="font-bold-headers">Enter Your New Password</h1>
+      <ResetPassword
         onSubmit={onSubmit}
         isLoading={isLoading}
         isError={error}
         setError={setError}
         setIsLoading={setIsLoading}
       />
-      <div className="flex flex-col items-center justify-center gap-2">
-        <p>
-          Don’t have an account?{" "}
-          <Link href="/auth/signup" className="text-[--cta-green-color]">
-            Sign Up
-          </Link>
-        </p>
-        <p>
-          Forgot Password?{" "}
-          <Link
-            href="/auth/forgot-password"
-            className="text-[--cta-green-color]"
-          >
-            Retrieve
-          </Link>
-        </p>
-      </div>
     </main>
   );
 }
