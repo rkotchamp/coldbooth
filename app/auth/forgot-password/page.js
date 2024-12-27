@@ -4,11 +4,13 @@ import { useRouter } from "next/navigation";
 import Link from "next/link";
 import BackArrow from "@/app/components/backArrow/BackArrow";
 import ForgotPasswordComponent from "@/app/components/forgotPassword/ForgotPassword";
+import SuccessPop from "@/app/components/popup/SuccessPop";
 
 export default function ForgotPassword() {
   const router = useRouter();
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState("");
+  const [isSuccess, setIsSuccess] = useState(false);
 
   const onSubmit = async (data) => {
     try {
@@ -30,7 +32,7 @@ export default function ForgotPassword() {
         return false;
       }
 
-      alert("Password reset email sent");
+      setIsSuccess(true);
 
       return true;
     } catch (error) {
@@ -62,6 +64,9 @@ export default function ForgotPassword() {
           </Link>
         </p>
       </div>
+      {isSuccess && (
+        <SuccessPop isSuccess={isSuccess} setIsSuccess={setIsSuccess} />
+      )}
     </main>
   );
 }

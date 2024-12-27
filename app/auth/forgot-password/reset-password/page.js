@@ -1,5 +1,5 @@
 "use client";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useRouter } from "next/navigation";
 import Link from "next/link";
 import BackArrow from "@/app/components/backArrow/BackArrow";
@@ -9,6 +9,15 @@ export default function ResetPasswordPage() {
   const router = useRouter();
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState("");
+
+  useEffect(() => {
+    const isLoggedIn = !!localStorage.getItem("token");
+    const hasChangedPassword = !!localStorage.getItem("hasChangedPassword");
+
+    if (isLoggedIn && hasChangedPassword) {
+      router.replace("/");
+    }
+  }, [router]);
 
   const url = new URL(window.location.href);
   const token = url.searchParams.get("token");
@@ -39,7 +48,8 @@ export default function ResetPasswordPage() {
       }
 
       alert("Password reset was succesful");
-      router.push("/dashboard");
+      localStorage.setItem("hasChangedPassword", true);
+      router.replace("/dashboard");
       return true;
     } catch (error) {
       console.error("Error during password reset:", error);
