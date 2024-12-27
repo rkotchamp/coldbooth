@@ -7,20 +7,27 @@ import { FcGoogle } from "react-icons/fc";
 import { signIn } from "next-auth/react";
 import LoginLoading from "@/app/auth/login/loading";
 
-const signUpSchema = z.object({
-  email: z.string().email("Please enter a Valid Email"),
-  password: z
-    .string()
-    .min(8, { message: "Password must be at least 8 characters" })
-    .regex(/[A-Z]/, {
-      message: "Password must contain at least one uppercase letter",
-    })
-    .regex(/[a-z]/, {
-      message: "Password must contain at least one lowercase letter",
+const resetSchema = z
+  .object({
+    password: z
+      .string()
+      .min(8, { message: "Password must be at least 8 characters" })
+      .regex(/[A-Z]/, {
+        message: "Password must contain at least one uppercase letter",
+      })
+      .regex(/[a-z]/, {
+        message: "Password must contain at least one lowercase letter",
+      }),
+    confirmPassword: z.string().min(1, {
+      message: "Please confirm your password",
     }),
-});
+  })
+  .refine((data) => data.password === data.confirmPassword, {
+    message: "Passwords do not match",
+    path: ["confirmPassword"],
+  });
 
-export default function Login({
+export default function ResetPasswordComponent({
   onSubmit,
   isLoading,
   isError,
@@ -32,9 +39,9 @@ export default function Login({
     handleSubmit,
     formState: { errors },
     reset,
-  } = useForm({ resolver: zodResolver(signUpSchema) });
+  } = useForm({ resolver: zodResolver(resetSchema) });
 
-  const loginSubmitHandler = async (data) => {
+  const resetSubmitHandler = async (data) => {
     try {
       if (onSubmit) {
         const success = await onSubmit(data);
@@ -44,34 +51,19 @@ export default function Login({
       }
     } catch (error) {
       console.error("Login error:", error);
-    }
-  };
-
-  const handleGoogleSignIn = async () => {
-    try {
-      setIsLoading(true);
-      const result = await signIn("google", {
-        callbackUrl: "/dashboard",
-        redirect: true,
-      });
-      if (result?.error) {
-        setError("Google sign-in error:", result.error);
-      }
-    } catch (error) {
-      console.error("Google sign-in error:", error);
-      setError("An unexpected error occurred");
+      setError("An unexpected error occurred. Please try again.");
     }
   };
 
   return (
     <div className="flex h-[60%] w-full flex-col items-center justify-center xs:w-full sm:w-[80%] md:w-[90%] lg:w-[60%]">
       <form
-        onSubmit={handleSubmit(loginSubmitHandler)}
+        onSubmit={handleSubmit(resetSubmitHandler)}
         className="mb-[10px] flex h-[60%] w-[70%] flex-col items-center justify-center gap-[20px] xs:w-[90%] sm:w-[80%] md:w-[80%] lg:w-[50%]"
       >
         <div className="flex w-full flex-col gap-3">
           <label htmlFor="password">
-            Password <span className="text-[--warning-color]">*</span>
+            New Password <span className="text-[--warning-color]">*</span>
           </label>
           <input
             type="password"
@@ -90,13 +82,15 @@ export default function Login({
           </label>
           <input
             type="password"
-            id="password"
+            id="confirmPassword"
             className="h-[60px] w-full rounded-[--small-border-radius] border-[1px] border-[--gray-light-border-color] bg-[--gray-white-color] p-[10px] font-medium text-[--text-black-color] xs:h-[50px] sm:h-[55px] md:h-[60px] lg:h-[60px]"
             placeholder="********"
-            {...register("password")}
+            {...register("confirmPassword")}
           />
-          {errors.password && (
-            <p className="text-[--warning-color]">{errors.password.message}</p>
+          {errors.confirmPassword && (
+            <p className="text-[--warning-color]">
+              {errors.confirmPassword.message}
+            </p>
           )}
         </div>
 
@@ -105,7 +99,7 @@ export default function Login({
             type="submit"
             className="w-full rounded-[--small-border-radius] bg-[--cta-green-color] p-[10px] font-[--medium-font-weight] text-[--gray-white-color]"
           >
-            {isLoading ? <LoginLoading /> : "Submit Now"}
+            {isLoading ? <LoginLoading /> : "Change Now"}
           </button>
         </div>
       </form>

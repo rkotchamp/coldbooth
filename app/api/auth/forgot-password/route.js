@@ -31,10 +31,8 @@ export async function POST(request) {
     },
   });
 
-  // Create the reset link
-  const resetLink = `${process.env.NEXTAUTH_URL}/auth/forgot-password?token=${token}`;
+  const resetLink = `${process.env.NEXTAUTH_URL}/auth/forgot-password/reset-password?token=${token}`;
 
-  // Send the email
   await transporter.sendMail({
     to: email,
     subject: "Password Reset",

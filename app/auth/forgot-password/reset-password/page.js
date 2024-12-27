@@ -10,17 +10,25 @@ export default function ResetPasswordPage() {
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState("");
 
+  const url = new URL(window.location.href);
+  const token = url.searchParams.get("token");
+
   const onSubmit = async (data) => {
     try {
       setIsLoading(true);
       setError("");
 
-      const response = await fetch("/api/auth/forgot-password", {
+      const requestedData = {
+        password: data.password,
+        token: token,
+      };
+
+      const response = await fetch("/api/auth/forgot-password/reset-password", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
         },
-        body: JSON.stringify(data),
+        body: JSON.stringify(requestedData),
       });
 
       const result = await response.json();
@@ -30,11 +38,12 @@ export default function ResetPasswordPage() {
         return false;
       }
 
-      alert("Password reset email sent");
-      router.push("/auth/login");
+      alert("Password reset was succesful");
+      router.push("/dashboard");
       return true;
     } catch (error) {
-      setError("An unexpected error occurred");
+      console.error("Error during password reset:", error);
+      setError("An unexpected error occurred. Please try again.");
       return false;
     } finally {
       setTimeout(() => {

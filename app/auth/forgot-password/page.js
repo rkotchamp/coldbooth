@@ -31,7 +31,7 @@ export default function ForgotPassword() {
       }
 
       alert("Password reset email sent");
-      router.push("/");
+
       return true;
     } catch (error) {
       setError("An unexpected error occurred");
