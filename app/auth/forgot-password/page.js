@@ -45,9 +45,13 @@ export default function ForgotPassword() {
     }
   };
 
+  const backFunction = () => {
+    router.back();
+  };
+
   return (
     <main className="flex h-screen flex-col items-center justify-center">
-      <BackArrow />
+      <BackArrow onClick={backFunction} />
       <h1 className="font-bold-headers">Retrieve Your Account</h1>
       <ForgotPasswordComponent
         onSubmit={onSubmit}

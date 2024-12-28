@@ -11,14 +11,14 @@ export default function ResetPasswordPage() {
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState("");
   const [isSuccess, setIsSuccess] = useState(false);
-  //   useEffect(() => {
-  //     const isLoggedIn = !!localStorage.getItem("token");
-  //     const hasChangedPassword = !!localStorage.getItem("hasChangedPassword");
+  useEffect(() => {
+    const isLoggedIn = !!localStorage.getItem("token");
+    const hasChangedPassword = !!localStorage.getItem("hasChangedPassword");
 
-  //     if (isLoggedIn && hasChangedPassword) {
-  //       router.replace("/");
-  //     }
-  //   }, [router]);
+    if (isLoggedIn && hasChangedPassword) {
+      router.replace("/");
+    }
+  }, [router]);
 
   const url = new URL(window.location.href);
   const token = url.searchParams.get("token");
@@ -49,9 +49,8 @@ export default function ResetPasswordPage() {
       }
 
       setIsSuccess(true);
-      //   router.push("/dashboard");
 
-      //   localStorage.setItem("hasChangedPassword", true);
+      localStorage.setItem("hasChangedPassword", true);
     } catch (error) {
       console.error("Error during password reset:", error);
       setError("An unexpected error occurred. Please try again.");
@@ -69,9 +68,13 @@ export default function ResetPasswordPage() {
     router.push("/dashboard");
   };
 
+  const backFunction = () => {
+    router.back();
+  };
+
   return (
     <main className="flex h-screen flex-col items-center justify-center">
-      <BackArrow />
+      <BackArrow onClick={backFunction} />
       <h1 className="font-bold-headers">Enter Your New Password</h1>
       <ResetPassword
         onSubmit={onSubmit}

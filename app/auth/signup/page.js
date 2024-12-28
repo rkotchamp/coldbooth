@@ -42,9 +42,13 @@ export default function Signup() {
     }
   };
 
+  const backFunction = () => {
+    router.back();
+  };
+
   return (
     <main className="flex h-screen flex-col items-center justify-center">
-      <BackArrow />
+      <BackArrow onClick={backFunction} />
       <h1 className="font-bold-headers">Sign-Up to Cold Booth</h1>
       <Form onSubmit={onSubmit} isLoading={isLoading} isError={error} />
       <div className="flex items-center justify-center gap-2">
