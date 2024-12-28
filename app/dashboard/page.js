@@ -5,6 +5,9 @@ import UserProfile from "@/app/components/userProfile/UserProfile";
 import PanelOneIcons from "@/app/components/PanelOneIcons/PanelOneIcons";
 import SettingsPane from "@/app/components/SettingsPane/SettingsPane";
 import AllMessageUsers from "@/app/components/Messages/AllMesssages/AllMessageUsers";
+import { FaSearch } from "react-icons/fa";
+import { RiArrowDropDownLine } from "react-icons/ri";
+import { RiArrowDropUpLine } from "react-icons/ri";
 
 export default function Dashboard() {
   return (
@@ -22,6 +25,37 @@ export default function Dashboard() {
 
       {/* Second Panel */}
       <section className="h-[var(--panel-heights)] w-[var(--second-panel-width)] border-r-[1px] border-[var(--gray-light-border-color)] bg-[var(--chat-panel-green-bg-color)]">
+        <div className="flex flex-col items-center justify-center p-10">
+          <div className="flex w-full items-center justify-between">
+            <h1 className="panelHeading-text">Chats</h1>
+            <div className="dropdown dropdown-end">
+              <div
+                tabIndex={0}
+                role="button"
+                className="btn m-1 bg-[--cta-green-color] text-[--gray-white-color] hover:bg-[--cta-green-color]"
+              >
+                All Chats
+                <RiArrowDropDownLine className="text-[30px]" />
+                {/* <RiArrowDropUpLine className="text-[30px]" /> */}
+              </div>
+              <ul
+                tabIndex={0}
+                className="menu dropdown-content z-[1] w-52 rounded-box bg-base-100 p-2 shadow"
+              >
+                <li>
+                  <a>Whatsapp</a>
+                </li>
+                <li>
+                  <a>Telegram</a>
+                </li>
+              </ul>
+            </div>
+          </div>
+          <div>
+            <FaSearch />
+          </div>
+        </div>
+
         <AllMessageUsers />
       </section>
 
