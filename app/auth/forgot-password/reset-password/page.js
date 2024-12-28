@@ -4,20 +4,21 @@ import { useRouter } from "next/navigation";
 import Link from "next/link";
 import BackArrow from "@/app/components/backArrow/BackArrow";
 import ResetPassword from "@/app/components/forgotPassword/Reset/ResetPassword";
+import SuccessPop from "@/app/components/popup/SuccessPop";
 
 export default function ResetPasswordPage() {
   const router = useRouter();
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState("");
+  const [isSuccess, setIsSuccess] = useState(false);
+  //   useEffect(() => {
+  //     const isLoggedIn = !!localStorage.getItem("token");
+  //     const hasChangedPassword = !!localStorage.getItem("hasChangedPassword");
 
-  useEffect(() => {
-    const isLoggedIn = !!localStorage.getItem("token");
-    const hasChangedPassword = !!localStorage.getItem("hasChangedPassword");
-
-    if (isLoggedIn && hasChangedPassword) {
-      router.replace("/");
-    }
-  }, [router]);
+  //     if (isLoggedIn && hasChangedPassword) {
+  //       router.replace("/");
+  //     }
+  //   }, [router]);
 
   const url = new URL(window.location.href);
   const token = url.searchParams.get("token");
@@ -47,10 +48,10 @@ export default function ResetPasswordPage() {
         return false;
       }
 
-      alert("Password reset was succesful");
-      localStorage.setItem("hasChangedPassword", true);
-      router.replace("/dashboard");
-      return true;
+      setIsSuccess(true);
+      //   router.push("/dashboard");
+
+      //   localStorage.setItem("hasChangedPassword", true);
     } catch (error) {
       console.error("Error during password reset:", error);
       setError("An unexpected error occurred. Please try again.");
@@ -60,6 +61,12 @@ export default function ResetPasswordPage() {
         setIsLoading(false);
       }, 1000);
     }
+  };
+
+  const handleClose = () => {
+    setIsSuccess(false);
+
+    router.push("/dashboard");
   };
 
   return (
@@ -73,6 +80,16 @@ export default function ResetPasswordPage() {
         setError={setError}
         setIsLoading={setIsLoading}
       />
+      {isSuccess && (
+        <SuccessPop
+          isClose={isSuccess}
+          setIsClose={setIsSuccess}
+          pageMessageHeader="Yay!!🥳 You did it"
+          pageMessage="Your password has been changed successfully"
+          onClose={handleClose}
+          btnText="Continue"
+        />
+      )}
     </main>
   );
 }

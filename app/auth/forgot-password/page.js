@@ -65,7 +65,12 @@ export default function ForgotPassword() {
         </p>
       </div>
       {isSuccess && (
-        <SuccessPop isSuccess={isSuccess} setIsSuccess={setIsSuccess} />
+        <SuccessPop
+          isClose={isSuccess}
+          setIsClose={setIsSuccess}
+          pageMessageHeader="Check your email"
+          pageMessage="We've sent you an email with a link to reset your password."
+        />
       )}
     </main>
   );

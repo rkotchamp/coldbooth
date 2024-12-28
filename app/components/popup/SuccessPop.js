@@ -1,15 +1,34 @@
-export default function SuccessPop({ isSuccess, setIsSuccess }) {
+export default function SuccessPop({
+  isClose,
+  setIsClose,
+  pageMessageHeader,
+  pageMessage,
+  onClose,
+  btnText,
+}) {
+  const closeFunction = () => {
+    setIsClose(false);
+  };
+
+  const defaultFunction = () => {
+    if (onClose) {
+      onClose();
+    } else {
+      closeFunction();
+    }
+  };
+
   return (
     <div className="modal modal-open">
       <div className="modal-box">
-        <h2 className="font-bold-headers">Check your email</h2>
-        <p>We&apos;ve sent you an email with a link to reset your password.</p>
+        <h3 className="font-bold-headers">{pageMessageHeader}</h3>
+        <p>{pageMessage}</p>
         <div className="modal-action">
           <button
             className="btn bg-[--cta-green-color] text-white hover:bg-[--cta-green-color]"
-            onClick={() => setIsSuccess(false)}
+            onClick={defaultFunction}
           >
-            Close
+            {btnText ? btnText : "Close"}
           </button>
         </div>
       </div>
