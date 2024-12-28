@@ -9,9 +9,11 @@ export default function Dashboard() {
   return (
     <main className="flex">
       <section className="flex h-[var(--panel-heights)] w-[var(--first-panel-width)] flex-col items-center bg-[var(--inside-app-bg-color)]">
-        <GiHamburgerMenu />
-        <UserProfile />
-        <SwitchNumberBtn />
+        <div className="flex w-full flex-col justify-between gap-[10px] bg-[var(--chat-panel-green-bg-color)]">
+          <GiHamburgerMenu className="xs:block sm:block md:hidden lg:hidden xl:hidden 2xl:hidden" />
+          <UserProfile />
+          <SwitchNumberBtn />
+        </div>
         <PanelOneIcons />
       </section>
       <section>

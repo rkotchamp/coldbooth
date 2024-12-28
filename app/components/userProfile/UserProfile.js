@@ -2,8 +2,8 @@ import Image from "next/image";
 
 export default function UserProfile() {
   return (
-    <div className="flex items-center gap-2">
-      <div className="h-[50px] w-[50px] rounded-[50px] border-2 border-[var(--chat-panel-green-bg-color)]">
+    <div className="flex items-center gap-2 border-b-[1px] border-[var(--gray-light-border-color)] py-2">
+      <div className="h-[50px] w-[50px] rounded-[50px]">
         <Image
           src="/images/macLou.JPG"
           alt="MacLou user Profile"

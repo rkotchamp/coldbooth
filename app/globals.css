@@ -30,6 +30,7 @@
   --lowest-smallest-smallFont: 10px;
   --low-small-smallFont: 12px;
   --reg-normal-normFont: 16px;
+  --insideApp-headers-font: 18px;
   --mid-medium-midFont: 20px;
   --lower-midFont: 24px;
   --upper-midFont: 30px;
@@ -65,7 +66,7 @@
 
   .panelHeading-text {
     font-weight: var(--bold-font-weight);
-    font-size: var(--mid-medium-midFont);
+    font-size: var(--insideApp-headers-font);
     color: var(--text-black-color);
   }
 
