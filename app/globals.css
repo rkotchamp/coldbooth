@@ -45,6 +45,13 @@
   --medium-font-weight: 600;
   --normal-font-weight: 400;
   --extrabold-font-weight: 800;
+
+  /* components sizes */
+  --first-panel-width: 200px;
+  --second-panel-width: 455px;
+  --third-panel-width: 833px;
+
+  --panel-heights: 906px;
 }
 
 @layer components {
