@@ -52,10 +52,18 @@
   --third-panel-width: 833px;
 
   --panel-heights: 906px;
+  --iconsActive-width: 40px;
+  --iconsActive-height: 35px;
 }
 
 @layer components {
   .font-bold-headers {
+    font-weight: var(--bold-font-weight);
+    font-size: var(--mid-medium-midFont);
+    color: var(--text-black-color);
+  }
+
+  .panelHeading-text {
     font-weight: var(--bold-font-weight);
     font-size: var(--mid-medium-midFont);
     color: var(--text-black-color);
