@@ -48,11 +48,11 @@
   --extrabold-font-weight: 800;
 
   /* components sizes */
-  --first-panel-width: 200px;
+  --first-panel-width: 220px;
   --second-panel-width: 455px;
   --third-panel-width: 833px;
 
-  --panel-heights: 906px;
+  --panel-heights: 100vh;
   --iconsActive-width: 40px;
   --iconsActive-height: 35px;
 }
@@ -68,6 +68,15 @@
     font-weight: var(--bold-font-weight);
     font-size: var(--insideApp-headers-font);
     color: var(--text-black-color);
+  }
+
+  .small-supporting-fonts {
+    font-size: var(--low-small-smallFont);
+  }
+
+  .mid-bold-user-name-fonts {
+    font-weight: var(--medium-font-weight);
+    font-size: var(--reg-normal-normFont);
   }
 
   @media (min-width: 320px) {

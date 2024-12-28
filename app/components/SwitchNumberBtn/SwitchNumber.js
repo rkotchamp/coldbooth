@@ -4,7 +4,7 @@ import { RiArrowDropUpLine } from "react-icons/ri";
 
 export default function SwitchNumberBtn() {
   return (
-    <div className="flex w-[var(--first-panel-width)] items-center gap-5 bg-[var(--chat-panel-green-bg-color)] py-2">
+    <div className="flex w-[var(--first-panel-width)] items-center gap-5 bg-[var(--chat-panel-green-bg-color)] p-2">
       <div className="h-[40px] w-[40px] rounded-[50px]">
         <Image
           src="/images/usFlag.png"

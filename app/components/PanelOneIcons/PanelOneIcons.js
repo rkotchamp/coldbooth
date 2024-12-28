@@ -10,7 +10,12 @@ export default function PanelOneIcons() {
         <IoCall className="text-[30px]" />
       </div>
       <div className="flex h-[var(--iconsActive-height)] w-[var(--iconsActive-width)] items-center rounded-[3px] bg-[var(--active-hover-green-bg-color)] p-2">
-        <IoMdChatboxes className="text-[30px]" />
+        <span className="indicator">
+          <IoMdChatboxes className="text-[30px]" />
+          <span className="badge indicator-item badge-secondary border-none bg-[--cta-green-color]">
+            10
+          </span>
+        </span>
       </div>
 
       <div className="flex h-[var(--iconsActive-height)] w-[var(--iconsActive-width)] items-center rounded-[3px] p-2">
