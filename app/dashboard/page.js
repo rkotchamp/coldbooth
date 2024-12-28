@@ -40,7 +40,7 @@ export default function Dashboard() {
               </div>
               <ul
                 tabIndex={0}
-                className="menu dropdown-content z-[1] w-52 rounded-box bg-base-100 p-2 shadow"
+                className="menu dropdown-content z-[1] w-52 rounded-box bg-[--entire-window-bg-color] p-2 shadow"
               >
                 <li>
                   <a>Whatsapp</a>
@@ -52,7 +52,21 @@ export default function Dashboard() {
             </div>
           </div>
           <div>
-            <FaSearch />
+            <div className="flex items-center gap-2">
+              <label
+                htmlFor="search"
+                className="flex items-center gap-2 bg-red-500"
+              >
+                <FaSearch />
+
+                <input
+                  type="text"
+                  placeholder="Search"
+                  className="input input-sm input-bordered w-full max-w-xs"
+                  id="search"
+                />
+              </label>
+            </div>
           </div>
         </div>
 
