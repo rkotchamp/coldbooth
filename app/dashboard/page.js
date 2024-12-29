@@ -25,7 +25,7 @@ export default function Dashboard() {
 
       {/* Second Panel */}
       <section className="h-[var(--panel-heights)] w-[var(--second-panel-width)] border-r-[1px] border-[var(--gray-light-border-color)] bg-[var(--chat-panel-green-bg-color)]">
-        <div className="flex flex-col items-center justify-center p-10">
+        <div className="flex flex-col items-center justify-start gap-5 px-10 py-4">
           <div className="flex w-full items-center justify-between">
             <h1 className="panelHeading-text">Chats</h1>
             <div className="dropdown dropdown-end">
@@ -55,14 +55,13 @@ export default function Dashboard() {
             <div className="flex items-center gap-2">
               <label
                 htmlFor="search"
-                className="flex items-center gap-2 bg-red-500"
+                className="flex items-center gap-2 rounded-[11px] border-[1px] border-[var(--gray-light-border-color)] bg-[--gray-white-color] px-3 py-3"
               >
                 <FaSearch />
-
                 <input
                   type="text"
                   placeholder="Search"
-                  className="input input-sm input-bordered w-full max-w-xs"
+                  className="w-full max-w-xs rounded-[10px] px-2 py-1 text-[--gray-black-color] placeholder:text-[--gray-black-color] active:outline-[--cta-green-color]"
                   id="search"
                 />
               </label>
