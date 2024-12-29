@@ -24,7 +24,7 @@ export default function Dashboard() {
       </section>
 
       {/* Second Panel */}
-      <section className="h-[var(--panel-heights)] w-[var(--second-panel-width)] border-r-[1px] border-[var(--gray-light-border-color)] bg-[var(--chat-panel-green-bg-color)]">
+      <section className="flex h-[var(--panel-heights)] w-[var(--second-panel-width)] flex-col border-r-[1px] border-[var(--gray-light-border-color)] bg-[var(--chat-panel-green-bg-color)]">
         <div className="flex flex-col items-center justify-start gap-5 px-10 py-4">
           <div className="flex w-full items-center justify-between">
             <h1 className="panelHeading-text">Chats</h1>
@@ -55,21 +55,22 @@ export default function Dashboard() {
             <div className="flex items-center gap-2">
               <label
                 htmlFor="search"
-                className="flex items-center gap-2 rounded-[11px] border-[1px] border-[var(--gray-light-border-color)] bg-[--gray-white-color] px-3 py-3"
+                className="flex items-center justify-center gap-4 rounded-[11px] border-[1px] border-[var(--gray-light-border-color)] bg-[--gray-white-color] px-6 py-3"
               >
                 <FaSearch />
                 <input
                   type="text"
                   placeholder="Search"
-                  className="w-full max-w-xs rounded-[10px] px-2 py-1 text-[--gray-black-color] placeholder:text-[--gray-black-color] active:outline-[--cta-green-color]"
+                  className="w-full max-w-xs rounded-[10px] px-2 py-1 text-[--gray-black-color] placeholder:text-[--gray-black-color] focus:outline-none focus:outline-2 focus:ring-2 focus:ring-[--chat-panel-green-bg-color]"
                   id="search"
                 />
               </label>
             </div>
           </div>
         </div>
-
-        <AllMessageUsers />
+        <div className="flex-1 overflow-y-auto">
+          <AllMessageUsers />
+        </div>
       </section>
 
       {/* Third Panel */}

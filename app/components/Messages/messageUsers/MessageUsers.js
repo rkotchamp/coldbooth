@@ -2,7 +2,7 @@ import { FaUser } from "react-icons/fa6";
 
 export default function MessageUsers() {
   return (
-    <div className="flex h-[70px] w-full items-center justify-center gap-[22px] p-10 hover:bg-[--inside-app-bg-color]">
+    <div className="flex h-[70px] w-full cursor-pointer items-center justify-center gap-[22px] p-10 hover:bg-[--inside-app-bg-color]">
       <div className="flex h-[50px] w-[50px] items-center justify-center rounded-[50px] bg-[--gray-dark-color]">
         <FaUser className="text-[20px] text-[--gray-white-color]" />
       </div>
