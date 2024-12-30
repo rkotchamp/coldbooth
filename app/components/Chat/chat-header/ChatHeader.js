@@ -7,7 +7,7 @@ import { FaSearch } from "react-icons/fa";
 
 export default function ChatHeader() {
   return (
-    <div className="p-10px flex items-center justify-between bg-[var(--chat-panel-green-bg-color)] p-10">
+    <div className="flex items-center justify-between bg-[var(--chat-panel-green-bg-color)] p-10">
       <div className="flex items-center justify-center gap-2">
         <MdSms className="text-[30px]" />
         <p className="panelHeading-text">+2343343435435</p>
