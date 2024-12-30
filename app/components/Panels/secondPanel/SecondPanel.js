@@ -2,12 +2,14 @@
 
 import { useState, useEffect, useRef, useCallback } from "react";
 import { FaSearch } from "react-icons/fa";
-import { RiArrowDropDownLine } from "react-icons/ri";
+import { RiArrowDropDownLine, RiArrowDropUpLine } from "react-icons/ri";
 import AllMessageUsers from "@/app/components/Messages/AllMesssages/AllMessageUsers";
 
 export default function SecondPanel() {
   // state to check if the user is scrolling so that shadow can be added under the search ba
   const [isScroll, setIsScroll] = useState(false);
+  const [allChatOpen, setAllChatOpen] = useState(false);
+  const [selectedChatHeader, setSelectedChatHeader] = useState("All Chats");
   const searchBarRef = useRef(null);
 
   // function to check if the user is scrolling so that shadow can be added under the search bar
@@ -31,6 +33,45 @@ export default function SecondPanel() {
     };
   }, [handleScroll]);
 
+  const handleAllChatOpen = () => {
+    setAllChatOpen(!allChatOpen);
+  };
+
+  const getWhatsappChats = async () => {
+    console.log("Whatsapp Chats");
+    setAllChatOpen(false);
+    setSelectedChatHeader("Whatsapp Chats");
+  };
+
+  const getTelegramChats = async () => {
+    console.log("Telegram Chats");
+    setAllChatOpen(false);
+    setSelectedChatHeader("Telegram Chats");
+  };
+
+  const getInstagramChats = async () => {
+    console.log("Instagram Chats");
+    setAllChatOpen(false);
+  };
+
+  const getFacebookChats = async () => {
+    console.log("Facebook Chats");
+    setAllChatOpen(false);
+    setSelectedChatHeader("Facebook Chats");
+  };
+
+  const getSmsChats = async () => {
+    console.log("SMS Chats");
+    setAllChatOpen(false);
+    setSelectedChatHeader("SMS Chats");
+  };
+
+  const getAllChats = async () => {
+    console.log("All Chats");
+    setAllChatOpen(false);
+    setSelectedChatHeader("All Chats");
+  };
+
   return (
     <section className="flex h-[var(--panel-heights)] w-[var(--second-panel-width)] flex-col border-r-[1px] border-[var(--gray-light-border-color)] bg-[var(--chat-panel-green-bg-color)]">
       <div
@@ -45,22 +86,40 @@ export default function SecondPanel() {
               tabIndex={0}
               role="button"
               className="btn m-1 bg-[--cta-green-color] text-[--gray-white-color] hover:bg-[--cta-green-color]"
+              onClick={handleAllChatOpen}
             >
-              All Chats
-              <RiArrowDropDownLine className="text-[30px]" />
-              {/* <RiArrowDropUpLine className="text-[30px]" /> */}
+              {selectedChatHeader}
+              {allChatOpen ? (
+                <RiArrowDropUpLine className="text-[30px]" />
+              ) : (
+                <RiArrowDropDownLine className="text-[30px]" />
+              )}
             </div>
-            <ul
-              tabIndex={0}
-              className="menu dropdown-content z-[1] w-52 rounded-box bg-[--entire-window-bg-color] p-2 shadow"
-            >
-              <li>
-                <a>Whatsapp</a>
-              </li>
-              <li>
-                <a>Telegram</a>
-              </li>
-            </ul>
+            {allChatOpen && (
+              <ul
+                tabIndex={0}
+                className="menu dropdown-content z-[1] w-52 rounded-box bg-[--entire-window-bg-color] p-2 shadow drop-shadow-lg"
+              >
+                <li>
+                  <a onClick={getAllChats}>All Chats</a>
+                </li>
+                <li>
+                  <a onClick={getSmsChats}>SMS</a>
+                </li>
+                <li>
+                  <a onClick={getWhatsappChats}>Whatsapp</a>
+                </li>
+                <li>
+                  <a onClick={getTelegramChats}>Telegram</a>
+                </li>
+                <li>
+                  <a onClick={getInstagramChats}>Instagram</a>
+                </li>
+                <li>
+                  <a onClick={getFacebookChats}>Facebook</a>
+                </li>
+              </ul>
+            )}
           </div>
         </div>
         <div>

@@ -6,25 +6,34 @@ import { IoSend } from "react-icons/io5";
 import { useForm } from "react-hook-form";
 
 export default function ChatFooter() {
-  const { register, handleSubmit, reset, watch } = useForm();
+  const { register, handleSubmit, reset, watch } = useForm({
+    defaultValues: {
+      message: "",
+    },
+  });
   const [isTyping, setIsTyping] = useState(false);
-  const [isFocused, setIsFocused] = useState(false);
+  const [spinnerLoading, setSpinnerLoading] = useState(false);
 
   const message = watch("message");
 
   const handleTextSubmit = (data) => {
+    setSpinnerLoading(true);
     console.log(data.message);
     reset();
-    setIsTyping(true);
+
+    setTimeout(() => {
+      setSpinnerLoading(false);
+      setIsTyping(false);
+    }, 300);
   };
 
   const handleFocus = () => {
+    // setIsFocused(true);
     if (message.trim().length > 0) {
       setIsTyping(true);
     } else {
       setIsTyping(false);
     }
-    setIsFocused(true);
   };
 
   const handleBlur = () => {
@@ -52,10 +61,41 @@ export default function ChatFooter() {
   };
 
   return (
-    <div className="w-full bg-[var(--chat-panel-green-bg-color)] p-5">
+    <div className="w-full border-t border-[var(--gray-light-border-color)] bg-[var(--chat-panel-green-bg-color)] p-5">
       <div className="flex items-center justify-center gap-10">
-        <div className="flex items-center gap-2">
-          <FaPaperclip className="text-[30px]" />
+        {/* clipper and pop up menu */}
+        <div className="dropdown dropdown-end dropdown-right flex items-center gap-2">
+          <FaPaperclip
+            className="m-1 cursor-pointer text-[30px]"
+            tabIndex={0}
+            role="button"
+          />
+          <ul
+            tabIndex={0}
+            className="menu dropdown-content z-[1] w-52 rounded-box bg-[--entire-window-bg-color] p-2 shadow drop-shadow-lg"
+          >
+            <li>
+              <a>Item 1</a>
+            </li>
+            <li>
+              <a>Item 1</a>
+            </li>
+            <li>
+              <a>Item 1</a>
+            </li>
+            <li>
+              <a>Item 1</a>
+            </li>
+            <li>
+              <a>Item 1</a>
+            </li>
+            <li>
+              <a>Item 1</a>
+            </li>
+            <li>
+              <a>Item 1</a>
+            </li>
+          </ul>
         </div>
 
         <form
@@ -76,19 +116,23 @@ export default function ChatFooter() {
               onInput={handleInput}
               onKeyDown={handleKeyDown}
             />
-            <FaSmile className="text-[30px]" />
+            <FaSmile className="cursor-pointer text-[30px]" />
           </label>
           {isTyping && (
             <button
               type="submit"
               className="flex h-[50px] w-[50px] items-center justify-center rounded-full bg-[var(--cta-green-color)] p-3 text-[30px] text-[var(--gray-white-color)]"
             >
-              <IoSend />
+              {spinnerLoading ? (
+                <span className="loading loading-spinner loading-sm"></span>
+              ) : (
+                <IoSend />
+              )}
             </button>
           )}
         </form>
         <div className="flex items-center gap-2">
-          <FaMicrophone className="text-[30px]" />
+          <FaMicrophone className="cursor-pointer text-[30px]" />
         </div>
       </div>
     </div>
