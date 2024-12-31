@@ -21,7 +21,6 @@ export default function ChatFooter() {
     setSpinnerLoading(true);
 
     try {
-      console.log("The data itself:", data);
       const response = await fetch("/api/sendSMS", {
         method: "POST",
         headers: {
@@ -36,6 +35,7 @@ export default function ChatFooter() {
       } else {
         throw new Error(responseData.error);
       }
+      console.log("The data itself:", data);
     } catch (error) {
     } finally {
       setTimeout(() => {
