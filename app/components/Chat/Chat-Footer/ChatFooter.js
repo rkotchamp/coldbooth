@@ -15,16 +15,35 @@ export default function ChatFooter() {
   const [spinnerLoading, setSpinnerLoading] = useState(false);
 
   const message = watch("message");
+  const phoneNumber = process.env.MY_PERSONAL_NUMBER;
 
-  const handleTextSubmit = (data) => {
+  const handleTextSubmit = async (data) => {
     setSpinnerLoading(true);
-    console.log(data.message);
-    reset();
 
-    setTimeout(() => {
-      setSpinnerLoading(false);
-      setIsTyping(false);
-    }, 300);
+    try {
+      console.log("The data itself:", data);
+      const response = await fetch("/api/sendSMS", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ to: phoneNumber, body: data }),
+      });
+
+      const responseData = await response.json();
+      if (response.ok) {
+        console.log("Message sent", responseData);
+      } else {
+        throw new Error(responseData.error);
+      }
+    } catch (error) {
+    } finally {
+      setTimeout(() => {
+        setSpinnerLoading(false);
+        setIsTyping(false);
+      }, 300);
+      reset();
+    }
   };
 
   const handleFocus = () => {
