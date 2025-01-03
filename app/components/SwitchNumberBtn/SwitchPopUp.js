@@ -28,15 +28,19 @@ export default function SwitchPopUp() {
           Facebook
         </div>
       </li>
+      {/* Apps that have not been integrated  */}
+      <hr />
+      <li>
+        <a className="font-bold text-[--gray-dark-color]">Add Accounts</a>
+      </li>
       <li>
         <div>
-          <FaTelegram />
-          Telegram
+          <div className="flex gap-2">
+            <FaPlus className="text-[--cta-green-color]" />
+            <FaTelegram className="text-[--gray-dark-color]" />
+          </div>
+          <p className="text-[--gray-dark-color]"> Telegram</p>
         </div>
-      </li>
-
-      <li>
-        <a>Add Number</a>
       </li>
     </ul>
   );
