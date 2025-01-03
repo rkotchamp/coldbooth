@@ -5,10 +5,10 @@ import { FaUser } from "react-icons/fa6";
 
 export default function PanelOneIcons() {
   return (
-    <div className="flex flex-col gap-[50px]">
-      <div className="flex h-[var(--iconsActive-height)] w-[var(--iconsActive-width)] items-center rounded-[3px] p-2">
+    <div className="flex flex-col gap-[50px] bg-red-300">
+      {/* <div className="flex h-[var(--iconsActive-height)] w-[var(--iconsActive-width)] items-center rounded-[3px] p-2">
         <IoCall className="text-[30px]" />
-      </div>
+      </div> */}
       <div className="flex h-[var(--iconsActive-height)] w-[var(--iconsActive-width)] items-center rounded-[3px] bg-[var(--active-hover-green-bg-color)] p-2">
         <span className="indicator">
           <IoMdChatboxes className="text-[30px]" />
@@ -18,12 +18,12 @@ export default function PanelOneIcons() {
         </span>
       </div>
 
-      <div className="flex h-[var(--iconsActive-height)] w-[var(--iconsActive-width)] items-center rounded-[3px] p-2">
+      {/* <div className="flex h-[var(--iconsActive-height)] w-[var(--iconsActive-width)] items-center rounded-[3px] p-2">
         <FaUser className="text-[30px]" />
       </div>
       <div className="flex h-[var(--iconsActive-height)] w-[var(--iconsActive-width)] items-center rounded-[3px] p-2">
         <MdOutlineDialpad className="text-[30px]" />
-      </div>
+      </div> */}
     </div>
   );
 }

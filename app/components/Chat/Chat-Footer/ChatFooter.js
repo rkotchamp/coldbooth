@@ -15,36 +15,38 @@ export default function ChatFooter() {
   const [spinnerLoading, setSpinnerLoading] = useState(false);
 
   const message = watch("message");
-  const phoneNumber = process.env.MY_PERSONAL_NUMBER;
 
-  const handleTextSubmit = async (data) => {
-    setSpinnerLoading(true);
+  // Meant for setting up Twilio in the sendSMS route
 
-    try {
-      const response = await fetch("/api/sendSMS", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({ to: phoneNumber, body: data }),
-      });
+  // const phoneNumber = process.env.MY_PERSONAL_NUMBER;
+  // const handleTextSubmit = async (data) => {
+  //   setSpinnerLoading(true);
 
-      const responseData = await response.json();
-      if (response.ok) {
-        console.log("Message sent", responseData);
-      } else {
-        throw new Error(responseData.error);
-      }
-      console.log("The data itself:", data);
-    } catch (error) {
-    } finally {
-      setTimeout(() => {
-        setSpinnerLoading(false);
-        setIsTyping(false);
-      }, 300);
-      reset();
-    }
-  };
+  //   try {
+  //     const response = await fetch("/api/sendSMS", {
+  //       method: "POST",
+  //       headers: {
+  //         "Content-Type": "application/json",
+  //       },
+  //       body: JSON.stringify({ to: phoneNumber, body: data }),
+  //     });
+
+  //     const responseData = await response.json();
+  //     if (response.ok) {
+  //       console.log("Message sent", responseData);
+  //     } else {
+  //       throw new Error(responseData.error);
+  //     }
+  //     console.log("The data itself:", data);
+  //   } catch (error) {
+  //   } finally {
+  //     setTimeout(() => {
+  //       setSpinnerLoading(false);
+  //       setIsTyping(false);
+  //     }, 300);
+  //     reset();
+  //   }
+  // };
 
   const handleFocus = () => {
     // setIsFocused(true);
@@ -54,6 +56,8 @@ export default function ChatFooter() {
       setIsTyping(false);
     }
   };
+
+  const handleSubmitMessage = async (data) => {};
 
   const handleBlur = () => {
     if (message.trim().length > 0) {
@@ -119,7 +123,7 @@ export default function ChatFooter() {
 
         <form
           className="flex w-[80%] items-center justify-center gap-5"
-          onSubmit={handleSubmit(handleTextSubmit)}
+          onSubmit={handleSubmit(handleSubmitMessage)}
         >
           <label
             htmlFor="message"
