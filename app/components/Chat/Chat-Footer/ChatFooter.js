@@ -4,6 +4,7 @@ import { useState } from "react";
 import { FaSmile, FaPaperclip, FaMicrophone } from "react-icons/fa";
 import { IoSend } from "react-icons/io5";
 import { useForm } from "react-hook-form";
+import MediaPopUp from "./MediaPopUp.js";
 
 export default function ChatFooter() {
   const { register, handleSubmit, reset, watch } = useForm({
@@ -93,32 +94,7 @@ export default function ChatFooter() {
             tabIndex={0}
             role="button"
           />
-          <ul
-            tabIndex={0}
-            className="menu dropdown-content z-[1] w-52 rounded-box bg-[--entire-window-bg-color] p-2 shadow drop-shadow-lg"
-          >
-            <li>
-              <a>Item 1</a>
-            </li>
-            <li>
-              <a>Item 1</a>
-            </li>
-            <li>
-              <a>Item 1</a>
-            </li>
-            <li>
-              <a>Item 1</a>
-            </li>
-            <li>
-              <a>Item 1</a>
-            </li>
-            <li>
-              <a>Item 1</a>
-            </li>
-            <li>
-              <a>Item 1</a>
-            </li>
-          </ul>
+          <MediaPopUp />
         </div>
 
         <form
