@@ -1,4 +1,4 @@
-# Privacy Policy for Coldbooth
+# Privacy Policy for BridgeMessage
 
 At Coldbooth, we respect your privacy and are committed to protecting the personal information you share with us. This Privacy Policy explains how we collect, use, and share your data.
 
