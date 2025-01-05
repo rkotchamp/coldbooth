@@ -1,6 +1,6 @@
 # Privacy Policy for BridgeMessage
 
-At Coldbooth, we respect your privacy and are committed to protecting the personal information you share with us. This Privacy Policy explains how we collect, use, and share your data.
+At BridgeMessage, we respect your privacy and are committed to protecting the personal information you share with us. This Privacy Policy explains how we collect, use, and share your data.
 
 ## 1. Information We Collect
 - **Personal Information**: We may collect personal details such as your name, email, and contact information when you sign up or integrate your account.
@@ -25,4 +25,4 @@ At Coldbooth, we respect your privacy and are committed to protecting the person
 - We may update this Privacy Policy periodically. Any changes will be posted on this page with the effective date.
 
 ## Contact Us
-If you have any questions or concerns, please contact us at [your contact information].
+If you have any questions or concerns, please contact us at treuben90@yahoo.com
