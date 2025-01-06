@@ -4,28 +4,13 @@ import { createContext, useContext, useState } from "react";
 const ItemsSettingsContext = createContext();
 
 export function ItemsSettingsContextProvider({ children }) {
-  const [accountSettings, setAccountSettings] = useState("Account");
-  const [integrations, setIntegrations] = useState("Integration");
-  const [subscription, setSubscription] = useState("Subscription");
-  const [security, setSecurity] = useState("Security");
-  const [support, setSupport] = useState("Support");
-  const [policies, setPolicies] = useState("Policies");
+  const [activeSettings, setActiveSettings] = useState("Account");
 
   return (
     <ItemsSettingsContext.Provider
       value={{
-        accountSettings,
-        setAccountSettings,
-        integrations,
-        setIntegrations,
-        subscription,
-        setSubscription,
-        security,
-        setSecurity,
-        support,
-        setSupport,
-        policies,
-        setPolicies,
+        activeSettings,
+        setActiveSettings,
       }}
     >
       {children}
