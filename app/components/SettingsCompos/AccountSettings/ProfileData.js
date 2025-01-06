@@ -8,8 +8,8 @@ const handleProfileChange = (e) => {
 };
 export default function ProfileDetails() {
   return (
-    <div className="flex h-[601px] w-[450px] flex-col items-center gap-11 rounded-[15px] border border-[--gray-light-border-color] bg-[--pure-White] py-10">
-      <div className="flex flex-col items-center justify-center gap-3">
+    <div className="flex h-[601px] w-[450px] flex-col items-center gap-11 rounded-[15px] border border-[--gray-light-border-color] bg-[--pure-White] py-10 drop-shadow-md">
+      <div className="flex w-[80%] flex-col items-start justify-center gap-3">
         <p className="panelHeading-text">Personal Details</p>
         <div className="relative flex h-[100px] w-[100px] items-center justify-center rounded-full">
           <Image

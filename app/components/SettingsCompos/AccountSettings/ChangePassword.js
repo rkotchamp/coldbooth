@@ -6,7 +6,7 @@ const handlePasswordChange = (e) => {
 };
 export default function ChangePassword() {
   return (
-    <div className="flex h-[601px] w-[450px] flex-col items-center gap-11 rounded-[15px] border border-[--gray-light-border-color] bg-[--pure-White] py-10">
+    <div className="flex h-[601px] w-[450px] flex-col items-center gap-11 rounded-[15px] border border-[--gray-light-border-color] bg-[--pure-White] py-10 drop-shadow-md">
       <div className="flex w-[80%] flex-col items-start gap-3">
         <p className="panelHeading-text">Change Password</p>
         {/* <div></div> */}
