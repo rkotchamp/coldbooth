@@ -8,8 +8,8 @@ const handleProfileChange = (e) => {
 };
 export default function ProfileDetails() {
   return (
-    <div className="flex h-[601px] w-[450px] flex-col items-center rounded-[15px] border border-[--gray-light-border-color] bg-[--pure-White]">
-      <div>
+    <div className="flex h-[601px] w-[450px] flex-col items-center gap-11 rounded-[15px] border border-[--gray-light-border-color] bg-[--pure-White] py-10">
+      <div className="flex flex-col items-center justify-center gap-3">
         <p className="panelHeading-text">Personal Details</p>
         <div className="relative flex h-[100px] w-[100px] items-center justify-center rounded-full">
           <Image
@@ -25,12 +25,19 @@ export default function ProfileDetails() {
         </div>
       </div>
 
-      <form className="flex w-[80%] flex-col bg-red-600">
-        <div className="flex flex-col">
+      <form className="flex w-[80%] flex-col gap-10">
+        <div className="flex flex-col gap-1">
           <label htmlFor="fullName">Full Name</label>
-          <input type="text" id="fullName" className="" />
+          <input
+            type="text"
+            id="fullName"
+            className="h-12 w-full rounded-sm border border-[--gray-light-border-color] p-[10px] focus:outline-none focus:ring-1 focus:ring-[--active-hover-green-bg-color]"
+            defaultValue="American Expresss Way"
+          />
         </div>
-        <SubButton btnText="Update Profile" onClick={handleProfileChange} />
+        <div className="flex w-full justify-end">
+          <SubButton btnText="Update Profile" onClick={handleProfileChange} />
+        </div>
       </form>
     </div>
   );
