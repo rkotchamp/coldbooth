@@ -5,9 +5,12 @@ import ChatHeader from "@/app/components/Chat/chat-header/ChatHeader";
 import ChatBubble from "@/app/components/Chat/ChatBubble/ChatBubble";
 import ChatFooter from "@/app/components/Chat/Chat-Footer/ChatFooter";
 import ActiveTabContext from "@/app/context/ActiveTabContext";
+import ItemsSettingsContext from "../../../context/ItemsSettingsActiveContext";
 
 export default function ThirdPanel() {
   const { openSettingsTab, setOpenSettingsTab } = useContext(ActiveTabContext);
+  const { activeSettings, setActiveSettings } =
+    useContext(ItemsSettingsContext);
 
   return (
     <section className="flex h-[var(--panel-heights)] w-[var(--third-panel-width)] flex-1 flex-col border-r-[1px] bg-[var(--entire-window-bg-color)]">
@@ -21,7 +24,7 @@ export default function ThirdPanel() {
         </>
       )}
 
-      {openSettingsTab && <AccountSettings />}
+      {openSettingsTab & (activeSettings === "Account") && <AccountSettings />}
     </section>
   );
 }
