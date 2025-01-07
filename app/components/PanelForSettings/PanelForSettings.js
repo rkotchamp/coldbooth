@@ -1,10 +1,18 @@
+"use client";
+
+import { useContext } from "react";
 import PanelItems from "./PanelItems";
 import { IoArrowBack } from "react-icons/io5";
 import { GrSettingsOption } from "react-icons/gr";
+import ItemsSettingsContext from "@/app/context/ItemsSettingsActiveContext";
 
 export default function PanelForSettings({ setOpenSettingsTab }) {
+  const { activeSettings, setActiveSettings } =
+    useContext(ItemsSettingsContext);
+
   const closeOpenedSettings = () => {
     setOpenSettingsTab(false);
+    setActiveSettings("Account");
   };
 
   return (

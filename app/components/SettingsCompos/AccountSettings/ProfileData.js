@@ -13,7 +13,7 @@ export default function ProfileDetails() {
         <p className="panelHeading-text">Personal Details</p>
         <div className="relative flex h-[100px] w-[100px] items-center justify-center rounded-full">
           <Image
-            src="/images/Meta.png"
+            src="/images/macLou.JPG"
             alt=""
             height={100}
             width={100}
