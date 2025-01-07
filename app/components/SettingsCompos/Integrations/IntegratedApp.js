@@ -40,7 +40,7 @@ export default function IntegratedApp({
       )}
 
       <div className="flex flex-col justify-center">
-        <p className="font-bold">{isChecked ? "Connected" : "Disconnected"}</p>
+        <p className="font-bold">{isChecked ? "Connected" : "Connect"}</p>
         <input
           type="checkbox"
           checked={isChecked}

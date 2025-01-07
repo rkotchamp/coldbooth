@@ -1,3 +1,9 @@
+import Method from "./Method";
+
 export default function Payments() {
-  return <div></div>;
+  return (
+    <div>
+      <Method />
+    </div>
+  );
 }
