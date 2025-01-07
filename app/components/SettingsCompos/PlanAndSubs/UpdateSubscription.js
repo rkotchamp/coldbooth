@@ -3,7 +3,7 @@ import { IoRocket } from "react-icons/io5";
 
 export default function UpdateSubscription() {
   const handleUpgradeBtnPop = () => {
-    console.log("Popped");
+    document.getElementById("my_modal_5").showModal();
   };
 
   return (
