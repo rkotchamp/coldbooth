@@ -7,6 +7,7 @@ import ChatFooter from "@/app/components/Chat/Chat-Footer/ChatFooter";
 import ActiveTabContext from "@/app/context/ActiveTabContext";
 import ItemsSettingsContext from "../../../context/ItemsSettingsActiveContext";
 import Integrations from "../../SettingsCompos/Integrations/Integrations";
+import PlanAndSubscription from "../../SettingsCompos/PlanAndSubs/PlanAndSubscription";
 
 export default function ThirdPanel() {
   const { openSettingsTab, setOpenSettingsTab } = useContext(ActiveTabContext);
@@ -27,6 +28,9 @@ export default function ThirdPanel() {
 
       {openSettingsTab && activeSettings === "Account" && <AccountSettings />}
       {openSettingsTab && activeSettings === "Integration" && <Integrations />}
+      {openSettingsTab && activeSettings === "Subscription" && (
+        <PlanAndSubscription />
+      )}
     </section>
   );
 }
