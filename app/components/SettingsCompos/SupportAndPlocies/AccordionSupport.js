@@ -39,14 +39,10 @@ export default function AccordionSupport({ data }) {
         </div>
         <div className="collapse-content text-sm">
           <div>
-            <p>Call Support</p>
-            <a href="tel:+12342453245">+1 234 245 3245</a>
-          </div>
-          <div>
-            <p>Email</p>
-            <a href="mailto:support@bridgemessage.com">
-              support@bridgemessage.com
-            </a>
+            <p>
+              We value your privacy and data. To read our full legal policies,
+              please click on Terms of Use and Privacy Policy.
+            </p>
           </div>
         </div>
       </div>
