@@ -12,7 +12,14 @@ export default function UpgradeAccordion({ data }) {
             <input type="radio" name="my-accordion-2" defaultChecked />
             <div className="collapse-title font-semibold">
               {items.plan}
-              <div>$ {items.price}</div>
+              <div>
+                $ {items.price}{" "}
+                {items.billed && (
+                  <span className="text-[12px] font-normal text-[--gray-dark-color]">
+                    {items.billed}
+                  </span>
+                )}
+              </div>
             </div>
             <div className="collapse-content text-sm">
               <ul className="flex flex-col gap-3">

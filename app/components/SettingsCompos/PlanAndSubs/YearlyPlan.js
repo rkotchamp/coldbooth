@@ -13,6 +13,7 @@ const yearly = [
       "Switch accounts between five numbers",
       "Priority customer support",
     ],
+    billed: "billed yearly as $567",
   },
   {
     plan: "Pro",
@@ -25,6 +26,7 @@ const yearly = [
       "Unlimited Calls to One Country",
       "Switch Accounts Between Two Numbers",
     ],
+    billed: "billed yearly as $567",
   },
   {
     plan: "Enterprise",
@@ -37,6 +39,7 @@ const yearly = [
       "Unlimited Calls to One Country",
       "Switch Accounts Between Two Numbers",
     ],
+    billed: "billed yearly as $567",
   },
 ];
 

@@ -8,6 +8,7 @@ import ActiveTabContext from "@/app/context/ActiveTabContext";
 import ItemsSettingsContext from "../../../context/ItemsSettingsActiveContext";
 import Integrations from "../../SettingsCompos/Integrations/Integrations";
 import PlanAndSubscription from "../../SettingsCompos/PlanAndSubs/PlanAndSubscription";
+import SupportAndPolicies from "../../SettingsCompos/SupportAndPlocies/SupportAndPolices";
 
 export default function ThirdPanel() {
   const { openSettingsTab, setOpenSettingsTab } = useContext(ActiveTabContext);
@@ -30,6 +31,9 @@ export default function ThirdPanel() {
       {openSettingsTab && activeSettings === "Integration" && <Integrations />}
       {openSettingsTab && activeSettings === "Subscription" && (
         <PlanAndSubscription />
+      )}
+      {openSettingsTab && activeSettings === "Policies" && (
+        <SupportAndPolicies />
       )}
     </section>
   );
