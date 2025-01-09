@@ -39,7 +39,7 @@ const monthly = [
 export default function MonthlyPlan() {
   return (
     <div>
-      <UpgradeAccordion data={monthly} />
+      <UpgradeAccordion data={monthly} period="monthly" />
     </div>
   );
 }

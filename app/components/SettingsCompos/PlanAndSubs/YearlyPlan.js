@@ -46,7 +46,7 @@ const yearly = [
 export default function YearlyPlan() {
   return (
     <div>
-      <UpgradeAccordion data={yearly} />
+      <UpgradeAccordion data={yearly} period="yearly" />
     </div>
   );
 }
