@@ -1,53 +1,81 @@
-const { defaults } = require("autoprefixer");
+import React from "react";
 
-export default function PriceCard({
+const PricingCard = ({
   title,
+  subtitle,
   price,
   features,
   isPopular,
-  onSubscribe,
-}) {
+  onStartTrial,
+  billed
+}) => {
   return (
-    <div
-      className={`rounded-lg border p-6 text-center ${
-        isPopular
-          ? "border-cta-green-color bg-light-mint-green-color"
-          : "border-gray-light-border-color bg-pure-White"
-      }`}
-    >
-      {/* If the plan is marked as popular, display a "Most Popular" label */}
-      {isPopular && (
-        <div className="bg-cta-green-color text-pure-White text-low-small-smallFont mb-4 inline-block rounded-md px-4 py-1 font-medium">
-          Most Popular
+    <div className="border-gray-light-border-color card w-72 border bg-base-100 shadow-xl">
+      {/* Card Header */}
+      <div className="card-body gap-4 p-6">
+        <div>
+          <h3 className="text-text-black-color card-title">
+            {title}
+            {isPopular && (
+              <div className="badge badge-success text-[var(--low-small-smallFont)]">
+                Most Popular
+              </div>
+            )}
+          </h3>
+          <p className="text-gray-dark-color text-[var(--low-small-smallFont)]">
+            {subtitle}
+          </p>
         </div>
-      )}
 
-      {/* Plan title */}
-      <h2 className="text-mid-medium-midFont text-text-black-color mb-2 font-bold">
-        {title}
-      </h2>
+        {/* Price Section */}
+        <div className="flex items-baseline">
+          <span className="text-text-black-color font-extrabold text-[var(--upper-midFont)]">
+            ${price}
+          </span>
+          <span className="text-gray-dark-color ml-1 text-[var(--low-small-smallFont)]">
+            /month
+          </span>
+        </div>
 
-      {/* Price display */}
-      <p className="text-upper-midFont text-primary-green-color mb-4 font-extrabold">
-        ${price}/month
-      </p>
+        {/* Features List */}
+        <ul className="space-y-3">
+          {features.map((feature, index) => (
+            <li key={index} className="flex items-start">
+              <svg
+                className="mr-3 mt-1 h-4 w-4 text-success"
+                fill="none"
+                viewBox="0 0 24 24"
+                stroke="currentColor"
+              >
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  strokeWidth={2}
+                  d="M5 13l4 4L19 7"
+                />
+              </svg>
+              <span className="text-text-black-color text-[var(--reg-normal-normFont)]">
+                {feature}
+              </span>
+            </li>
+          ))}
+        </ul>
 
-      {/* Features list */}
-      <ul className="text-gray-dark-color text-low-small-smallFont mb-4 text-left">
-        {features.map((feature, index) => (
-          <li key={index} className="mb-2">
-            ✅ {feature}
-          </li>
-        ))}
-      </ul>
-
-      {/* Subscription button */}
-      <button
-        onClick={onSubscribe}
-        className="bg-cta-green-color text-pure-White text-reg-normal-normFont hover:bg-active-hover-green-bg-color rounded-md px-4 py-2 font-medium"
-      >
-        Subscribe
-      </button>
+        {/* Card Actions */}
+        <div className="card-actions flex-col">
+          <button
+            onClick={onStartTrial}
+            className="btn btn-success w-full text-white"
+          >
+            Start 7 days free trial
+          </button>
+          <p className="text-gray-dark-color text-center text-[var(--low-small-smallFont)]">
+            $0.00 due today, cancel anytime
+          </p>
+        </div>
+      </div>
     </div>
   );
-}
+};
+
+export default PricingCard;
