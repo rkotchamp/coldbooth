@@ -54,6 +54,7 @@ const yearlyPlan = [
       "Priority customer support",
     ],
     billed: "billed yearly as $567",
+    saveUp: "Save $34 with yearly pricing(40% off)",
   },
   {
     plan: "Pro",
@@ -68,6 +69,7 @@ const yearlyPlan = [
     ],
     isPopular: true,
     billed: "billed yearly as $567",
+    saveUp: "Save $34 with yearly pricing(40% off)",
   },
   {
     plan: "Enterprise",
@@ -81,6 +83,7 @@ const yearlyPlan = [
       "Switch Accounts Between Two Numbers",
     ],
     billed: "billed yearly as $567",
+    saveUp: "Save $34 with yearly pricing(40% off)",
   },
 ];
 
@@ -88,7 +91,7 @@ export default function EntirePrice() {
   const [periods, setPeriods] = useState("year");
 
   return (
-    <div>
+    <div className="flex flex-col items-center gap-5 bg-red-400">
       {/* Render monthly plans */}
 
       <div className="flex w-[300px] rounded-full bg-[--gray-review-color] p-[5px]">
@@ -130,6 +133,7 @@ export default function EntirePrice() {
               features={plan.benefits}
               isPopular={plan.isPopular}
               billed={plan.billed}
+              saveUp={plan.saveUp}
               onSubscribe={() => alert(`Subscribed to ${plan.plan} (Yearly)`)}
             />
           ))}
