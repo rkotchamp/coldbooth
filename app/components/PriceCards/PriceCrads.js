@@ -1,6 +1,7 @@
 "use client";
 import React from "react";
 import { useStripeCheckout } from "@/app/lib/useStripeCheckout";
+import { BsShieldFillCheck } from "react-icons/bs";
 
 const PricingCard = ({
   title,
@@ -11,13 +12,13 @@ const PricingCard = ({
   onStartTrial,
   billed,
   saveUp,
-  period
+  period,
 }) => {
   const { handleCheckout, isLoading, error } = useStripeCheckout();
 
   return (
     <div
-      className={`card w-[50%] border bg-base-100 ${isPopular && "border-2 border-[--cta-green-color]"} shadow-xl`}
+      className={`card w-[90%] border bg-base-100 sm:w-[90%] md:w-[75%] lg:w-[50%] ${isPopular && "border-2 border-[--cta-green-color]"} shadow-xl`}
     >
       {/* Card Header */}
       <div className="card-body gap-4 p-6">
@@ -77,11 +78,18 @@ const PricingCard = ({
             onClick={() => handleCheckout(title.toLowerCase(), period)}
             className="btn btn-success w-full bg-[--cta-green-color] text-[--gray-white-color]"
           >
-            Start 7 days free trial
+            {isLoading ? (
+              <span className="loading loading-spinner loading-sm"></span>
+            ) : (
+              "Start 7 days free trial"
+            )}
           </button>
-          <p className="w-full text-center text-[12px]">
+          {/* <div className="flex w-full items-center justify-center gap-0"> */}
+          <p className="flex w-full items-center justify-center gap-1 p-0 text-[12px]">
+            <BsShieldFillCheck className="text-[--cta-green-color]" />
             $0.00 due today, cancel anytime
           </p>
+          {/* </div> */}
         </div>
       </div>
     </div>

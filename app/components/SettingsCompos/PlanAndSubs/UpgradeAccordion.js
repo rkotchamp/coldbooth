@@ -46,7 +46,11 @@ export default function UpgradeAccordion({ data, period }) {
                   }
                   className="w-[50%] rounded-md bg-[--cta-green-color] p-3 font-medium text-[--gray-white-color]"
                 >
-                  Update Now
+                  {isLoading ? (
+                    <span className="loading loading-spinner loading-sm"></span>
+                  ) : (
+                    "Update Now"
+                  )}
                 </button>
               </div>
             </div>
