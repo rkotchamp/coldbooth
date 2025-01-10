@@ -1,4 +1,6 @@
+"use client";
 import React from "react";
+import { useStripeCheckout } from "@/app/lib/useStripeCheckout";
 
 const PricingCard = ({
   title,
@@ -9,7 +11,10 @@ const PricingCard = ({
   onStartTrial,
   billed,
   saveUp,
+  period
 }) => {
+  const { handleCheckout, isLoading, error } = useStripeCheckout();
+
   return (
     <div
       className={`card w-[50%] border bg-base-100 ${isPopular && "border-2 border-[--cta-green-color]"} shadow-xl`}
@@ -25,18 +30,16 @@ const PricingCard = ({
               </div>
             )}
           </h3>
-          <p className="text-gray-dark-color text-[var(--low-small-smallFont)]">
-            {subtitle}
-          </p>
+          <p className="text-gray-dark-color text-[12px]">{subtitle}</p>
         </div>
 
         {/* Price Section */}
         <div className="flex flex-col items-baseline">
           <div className="flex items-baseline">
-            <span className="text-text-black-color font-extrabold text-[var(--upper-midFont)]">
+            <span className="text-[30px] font-extrabold text-[--text-black-color]">
               ${price}
             </span>
-            <span className="text-gray-dark-color ml-1 text-[var(--low-small-smallFont)]">
+            <span className="ml-1 text-[12px] text-[--gray-dark-color]">
               /month
             </span>
           </div>
@@ -61,7 +64,7 @@ const PricingCard = ({
                   d="M5 13l4 4L19 7"
                 />
               </svg>
-              <span className="text-text-black-color text-[var(--reg-normal-normFont)]">
+              <span className="text-[16px] text-[--text-black-color]">
                 {feature}
               </span>
             </li>
@@ -71,12 +74,12 @@ const PricingCard = ({
         {/* Card Actions */}
         <div className="card-actions flex-col">
           <button
-            onClick={onStartTrial}
+            onClick={() => handleCheckout(title.toLowerCase(), period)}
             className="btn btn-success w-full bg-[--cta-green-color] text-[--gray-white-color]"
           >
             Start 7 days free trial
           </button>
-          <p className="text-gray-dark-color text-center text-[12px]">
+          <p className="w-full text-center text-[12px]">
             $0.00 due today, cancel anytime
           </p>
         </div>

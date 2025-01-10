@@ -17,10 +17,14 @@ const STRIPE_PRICE_IDS = {
 };
 
 export async function POST(req) {
-  const { plan, period } = await req.json();
+  const { plan, period, returnUrl } = await req.json();
 
   try {
     const priceId = STRIPE_PRICE_IDS[period.toLowerCase()][plan.toLowerCase()];
+    const baseUrl = process.env.NEXT_PUBLIC_BASE_URL;
+    const successUrl = `${baseUrl}/settings?session_id={CHECKOUT_SESSION_ID}`;
+    const cancelUrl = `${baseUrl}${returnUrl || "/"}`;
+
     const session = await stripe.checkout.sessions.create({
       line_items: [
         {
@@ -29,8 +33,8 @@ export async function POST(req) {
         },
       ],
       mode: "subscription",
-      success_url: `${process.env.NEXT_PUBLIC_BASE_URL}/settings?session_id={CHECKOUT_SESSION_ID}`,
-      cancel_url: `${process.env.NEXT_PUBLIC_BASE_URL}/settings`,
+      success_url: successUrl,
+      cancel_url: cancelUrl,
       metadata: {
         plan,
         period,

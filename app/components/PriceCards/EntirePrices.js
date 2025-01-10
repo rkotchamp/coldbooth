@@ -119,6 +119,7 @@ export default function EntirePrice() {
               features={plan.benefits}
               isPopular={plan.isPopular}
               onSubscribe={() => alert(`Subscribed to ${plan.plan} (Monthly)`)}
+              period="monthly"
             />
           ))}
         </div>
@@ -135,6 +136,7 @@ export default function EntirePrice() {
               billed={plan.billed}
               saveUp={plan.saveUp}
               onSubscribe={() => alert(`Subscribed to ${plan.plan} (Yearly)`)}
+              period="yearly"
             />
           ))}
         </div>
