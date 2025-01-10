@@ -2,93 +2,12 @@
 
 import { useState } from "react";
 import PriceCard from "./PriceCrads";
-
-const monthlyPlan = [
-  {
-    plan: "Starter",
-    price: "5.33",
-    benefits: [
-      "4 Local or international Number",
-      "Send & Receive WhatsApp Messages",
-      "Facebook & Instagram Messaging",
-      "Custom SMS Sending",
-    ],
-  },
-  {
-    plan: "Pro",
-    price: "13.33",
-    benefits: [
-      "1 Local or Global Number",
-      "Send & Receive WhatsApp Messages",
-      "Facebook & Instagram Messaging",
-      "Custom SMS Sending",
-      "Unlimited Calls to One Country",
-      "Switch Accounts Between Two Numbers",
-    ],
-    isPopular: true,
-  },
-  {
-    plan: "Enterprise",
-    price: "14.33",
-    benefits: [
-      "1 Local or Global Number",
-      "Send & Receive WhatsApp Messages",
-      "Facebook & Instagram Messaging",
-      "Custom SMS Sending",
-      "Unlimited Calls to One Country",
-    ],
-  },
-];
-
-const yearlyPlan = [
-  {
-    plan: "Starter",
-    price: "5.33",
-    benefits: [
-      "3 Local or international Number",
-      "Send & Receive WhatsApp Messages",
-      "Facebook & Instagram Messaging",
-      "Custom SMS Sending",
-      "Unlimited international calls",
-      "Switch accounts between five numbers",
-      "Priority customer support",
-    ],
-    billed: "billed yearly as $567",
-    saveUp: "Save $34 with yearly pricing(40% off)",
-  },
-  {
-    plan: "Pro",
-    price: "10.33",
-    benefits: [
-      "1 Local or Global Number",
-      "Send & Receive WhatsApp Messages",
-      "Facebook & Instagram Messaging",
-      "Custom SMS Sending",
-      "Unlimited Calls to One Country",
-      "Switch Accounts Between Two Numbers",
-    ],
-    isPopular: true,
-    billed: "billed yearly as $567",
-    saveUp: "Save $34 with yearly pricing(40% off)",
-  },
-  {
-    plan: "Enterprise",
-    price: "15.33",
-    benefits: [
-      "1 Local or Global Number",
-      "Send & Receive WhatsApp Messages",
-      "Facebook & Instagram Messaging",
-      "Custom SMS Sending",
-      "Unlimited Calls to One Country",
-      "Switch Accounts Between Two Numbers",
-    ],
-    billed: "billed yearly as $567",
-    saveUp: "Save $34 with yearly pricing(40% off)",
-  },
-];
+import pricesPack from "pricesPack.json";
 
 export default function EntirePrice() {
   const [periods, setPeriods] = useState("year");
+  const { monthlyPlan, yearlyPlan } = pricesPack;
+  console.log(pricesPack);
 
   return (
     <div className="flex flex-col items-center gap-5 bg-red-400">

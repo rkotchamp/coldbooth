@@ -25,6 +25,10 @@ export default function UpgradeAccordion({ data, period }) {
               </div>
             </div>
             <div className="collapse-content text-sm">
+              {items.saveUp && (
+                <p className="text-[--cta-green-color]">{items.saveUp}</p>
+              )}
+
               <ul className="flex flex-col gap-3">
                 {items.benefits.map((benefit, bIndex) => {
                   return (
@@ -37,7 +41,9 @@ export default function UpgradeAccordion({ data, period }) {
               </ul>
               <div className="flex w-full justify-center py-5">
                 <button
-                  onClick={handleCheckout(items.plan)}
+                  onClick={() =>
+                    handleCheckout(items.plan.toLowerCase(), period)
+                  }
                   className="w-[50%] rounded-md bg-[--cta-green-color] p-3 font-medium text-[--gray-white-color]"
                 >
                   Update Now
