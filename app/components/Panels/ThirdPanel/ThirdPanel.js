@@ -16,11 +16,12 @@ export default function ThirdPanel() {
     useContext(ItemsSettingsContext);
 
   return (
-    <section className="flex h-[var(--panel-heights)] w-[var(--third-panel-width)] flex-1 flex-col border-r-[1px] bg-[var(--entire-window-bg-color)]">
+    // w-[var(--third-panel-width)]
+    <section className="flex h-[var(--panel-heights)] flex-1 flex-col border-r-[1px] bg-[var(--entire-window-bg-color)]">
       {!openSettingsTab && (
         <>
           <ChatHeader />
-          <div className="overflow-y-auto">
+          <div className="flex-grow overflow-y-auto">
             <ChatBubble />
           </div>
           <ChatFooter />

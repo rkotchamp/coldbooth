@@ -15,14 +15,14 @@ export default function EntirePrice() {
 
       <div className="flex w-[300px] rounded-full bg-[--gray-review-color] p-[5px]">
         <button
-          className={`w-[50%] rounded-l-full hover:bg-[--gray-review-color] ${periods === "month" ? "bg-[--cta-green-color] text-[--gray-white-color]" : "bg-[--gray-white-color]"} p-5 font-medium`}
+          className={`w-[50%] rounded-l-full ${periods === "month" ? "bg-[--cta-green-color] text-[--gray-white-color] hover:bg-none" : "bg-[--gray-white-color] hover:bg-[--gray-review-color]"} p-5 font-medium`}
           onClick={() => setPeriods("month")}
         >
           Monthly
         </button>
         <button
           onClick={() => setPeriods("year")}
-          className={`w-[50%] rounded-r-full hover:bg-[--gray-review-color] ${periods === "year" ? "bg-[--cta-green-color] text-[--gray-white-color]" : "bg-[--gray-white-color]"} p-5 font-medium`}
+          className={`w-[50%] rounded-r-full ${periods === "year" ? "bg-[--cta-green-color] text-[--gray-white-color] hover:bg-none" : "bg-[--gray-white-color] hover:bg-[--gray-review-color]"} p-5 font-medium`}
         >
           Yearly
         </button>

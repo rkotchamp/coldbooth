@@ -19,16 +19,14 @@ const phoneNumbers = [
 
 export default function FirstPanel() {
   const { openSettingsTab, setOpenSettingsTab } = useContext(ActiveTabContext);
-  console.log(openSettingsTab);
 
   return (
-    <section className="flex h-[var(--panel-heights)] w-[var(--first-panel-width)] flex-col items-center gap-[100px] overflow-hidden border-r-[1px] border-[var(--gray-light-border-color)] bg-[var(--inside-app-bg-color)] pt-[30px]">
+    <section className="flex h-[var(--panel-heights)] w-full flex-col items-center gap-[100px] overflow-hidden border-r-[1px] border-[var(--gray-light-border-color)] bg-[var(--inside-app-bg-color)] pt-[30px]">
       {!openSettingsTab && (
         <>
           <div
             className={`flex w-full flex-col justify-between gap-[10px] bg-[var(--chat-panel-green-bg-color)]`}
           >
-            <GiHamburgerMenu className="xs:block sm:block md:hidden lg:hidden xl:hidden 2xl:hidden" />
             <UserProfile />
             <div className="dropdown dropdown-end">
               <SwitchIntegrationBtn />

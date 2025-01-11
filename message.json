@@ -1,0 +1,88 @@
+{
+  "conversations": [
+    {
+      "id": 1,
+      "participants": {
+        "sender": "Kurt Jones",
+        "receiver": "Remus Notar"
+      },
+      "status": true,
+      "messages": [
+        {
+          "id": 1,
+          "type": "received",
+          "sender": "Kurt Jones",
+          "platForm": "facebook",
+          "unRead": "3",
+          "text": "It was a pleasure to chat with you",
+          "time": "12:00"
+        },
+        {
+          "id": 2,
+          "type": "sent",
+          "sender": "Remus Notar",
+          "platForm": "facebook",
+          "unRead": "",
+          "text": "It was a pleasure to chat with you too!",
+          "time": "12:01"
+        }
+      ]
+    },
+    {
+      "id": 2,
+      "participants": {
+        "sender": "Maiden Mes",
+        "receiver": "Kojo Anim"
+      },
+      "status": false,
+      "messages": [
+        {
+          "id": 3,
+          "type": "sent",
+          "sender": "Maiden Mes",
+          "platForm": "instagram",
+          "unRead": "13",
+          "text": "It must be 40 characters then you truncate",
+          "time": "00:01"
+        },
+        {
+          "id": 4,
+          "type": "received",
+          "sender": "Kojo Anim",
+          "platForm": "WhatsApp",
+          "unRead": "",
+          "text": "It was a pleasure",
+          "time": "10:01"
+        }
+      ]
+    },
+    {
+      "id": 3,
+      "participants": {
+        "sender": "Rojo Pane",
+        "receiver": "Kay Rojo"
+      },
+      "status": true,
+      "messages": [
+        {
+          "id": 5,
+          "type": "sent",
+          "sender": "Kojo Anim",
+          "platForm": "WhatsApp",
+          "unRead": "",
+          "text": "It was a pleasure",
+          "time": "10:01"
+        },
+        {
+          "id": 6,
+          "type": "received",
+          "sender": "Alice Smith",
+          "platForm": "twitter",
+          "unRead": "1",
+          "text": "Looking forward to our meeting!",
+          "time": "12:03"
+        }
+      ]
+    }
+  ]
+}

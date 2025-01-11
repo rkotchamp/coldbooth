@@ -78,7 +78,7 @@ export default function SecondPanel() {
     <>
       {!openSettingsTab && (
         <section
-          className={`flex h-[var(--panel-heights)] w-[var(--second-panel-width)] flex-col border-r-[1px] border-[var(--gray-light-border-color)] bg-[var(--chat-panel-green-bg-color)] duration-500 ease-in-out ${!openSettingsTab ? "-translate-x-0" : "translate-x-full"} transform transition-transform`}
+          className={`flex h-screen w-full flex-col border-r-[1px] border-[var(--gray-light-border-color)] bg-[var(--chat-panel-green-bg-color)] duration-500 ease-in-out ${!openSettingsTab ? "-translate-x-0" : "translate-x-full"} transform transition-transform`}
         >
           <div
             className={`flex flex-col items-center justify-start gap-5 px-10 py-4 ${

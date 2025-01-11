@@ -14,6 +14,8 @@ export default function ChatFooter() {
   });
   const [isTyping, setIsTyping] = useState(false);
   const [spinnerLoading, setSpinnerLoading] = useState(false);
+  const [showMediaMenu, setShowMediaMenu] = useState(false);
+  const [messaging, setMessaging] = useState("");
 
   const message = watch("message");
 
@@ -85,29 +87,42 @@ export default function ChatFooter() {
   };
 
   return (
-    <div className="w-full border-t border-[var(--gray-light-border-color)] bg-[var(--chat-panel-green-bg-color)] p-5">
-      <div className="flex items-center justify-center gap-10">
+    <div className="border-t border-[var(--gray-light-border-color)] bg-[var(--chat-panel-green-bg-color)] p-4">
+      <div className="flex items-center gap-4">
         {/* clipper and pop up menu */}
-        <div className="dropdown dropdown-end dropdown-right flex items-center gap-2">
-          <FaPaperclip
-            className="m-1 cursor-pointer text-[30px]"
-            tabIndex={0}
-            role="button"
-          />
-          <MediaPopUp />
+        <div className="relative">
+          <button
+            onClick={() => setShowMediaMenu(!showMediaMenu)}
+            className="text-gray-600 hover:text-gray-800"
+          >
+            <FaPaperclip className="text-xl lg:text-2xl" />
+          </button>
+
+          {showMediaMenu && (
+            <div className="absolute bottom-full left-0 mb-2 w-48 rounded-lg bg-white p-2 shadow-lg">
+              <ul className="space-y-2">
+                <li className="flex cursor-pointer items-center gap-2 rounded px-3 py-2 hover:bg-gray-100">
+                  <span className="text-lg">📷</span> Images & Videos
+                </li>
+                <li className="flex cursor-pointer items-center gap-2 rounded px-3 py-2 hover:bg-gray-100">
+                  <span className="text-lg">📁</span> Files
+                </li>
+                <li className="flex cursor-pointer items-center gap-2 rounded px-3 py-2 hover:bg-gray-100">
+                  <span className="text-lg">📸</span> Camera
+                </li>
+              </ul>
+            </div>
+          )}
         </div>
 
         <form
           className="flex w-[80%] items-center justify-center gap-5"
           onSubmit={handleSubmit(handleSubmitMessage)}
         >
-          <label
-            htmlFor="message"
-            className="flex w-[100%] items-center justify-center gap-5 rounded-full bg-[var(--gray-white-color)] py-3"
-          >
+          <div className="flex w-[100%] items-center gap-2 rounded-full bg-[var(--gray-white-color)] px-4 py-2">
             <textarea
               {...register("message")}
-              className="textarea h-[32px] w-[90%] resize-none overflow-hidden rounded-full bg-transparent px-10 placeholder:text-left focus:outline-none focus:ring-2 focus:ring-[var(--primary-green-color)]"
+              className="resize-none overflow-hidden rounded-full bg-transparent focus:outline-none focus:ring-2 focus:ring-[var(--cta-green-color)]"
               placeholder="Write a message..."
               id="message"
               onFocus={handleFocus}
@@ -115,24 +130,22 @@ export default function ChatFooter() {
               onInput={handleInput}
               onKeyDown={handleKeyDown}
             />
-            <FaSmile className="cursor-pointer text-[30px]" />
-          </label>
+            <button type="button" className="text-gray-600 hover:text-gray-800">
+              <FaSmile className="text-xl lg:text-[30px]" />
+            </button>
+          </div>
           {isTyping && (
             <button
               type="submit"
-              className="flex h-[50px] w-[50px] items-center justify-center rounded-full bg-[var(--cta-green-color)] p-3 text-[30px] text-[var(--gray-white-color)]"
+              className="flex h-10 w-10 items-center justify-center rounded-full bg-[var(--cta-green-color)]"
             >
-              {spinnerLoading ? (
-                <span className="loading loading-spinner loading-sm"></span>
-              ) : (
-                <IoSend />
-              )}
+              <IoSend className="text-lg" />
             </button>
           )}
         </form>
-        <div className="flex items-center gap-2">
-          <FaMicrophone className="cursor-pointer text-[30px]" />
-        </div>
+        <button className="text-gray-600 hover:text-gray-800">
+          <FaMicrophone className="text-xl lg:text-2xl" />
+        </button>
       </div>
     </div>
   );
