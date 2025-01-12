@@ -10,6 +10,7 @@ export default function ChatFooter() {
   const { register, handleSubmit, reset, watch } = useForm({
     defaultValues: {
       message: "",
+      recipientId: "",
     },
   });
   const [isTyping, setIsTyping] = useState(false);
@@ -60,6 +61,34 @@ export default function ChatFooter() {
     }
   };
 
+  const linkedInSubmitMessage = async (data) => {
+    setSpinnerLoading(true);
+    try {
+      const response = await fetch("/api/linkedin", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          authorizationCode: "YOUR_AUTHORIZATION_CODE", // Replace with actual authorization code
+          recipientId: data.recipientId, // Send recipient ID
+          message: data.message, // Send message content
+        }),
+      });
+
+      const responseData = await response.json();
+      if (response.ok) {
+        console.log("Message sent", responseData);
+      } else {
+        throw new Error(responseData.error);
+      }
+    } catch (error) {
+      console.error("Error sending message:", error);
+    } finally {
+      setSpinnerLoading(false);
+    }
+  };
+
   const handleSubmitMessage = async (data) => {};
 
   const handleBlur = () => {
@@ -82,7 +111,7 @@ export default function ChatFooter() {
   const handleKeyDown = (e) => {
     if (e.key === "Enter" && !e.shiftKey) {
       e.preventDefault();
-      handleSubmit(handleTextSubmit)();
+      handleSubmit(linkedInSubmitMessage)();
     }
   };
 
@@ -117,12 +146,12 @@ export default function ChatFooter() {
 
         <form
           className="flex w-[80%] items-center justify-center gap-5"
-          onSubmit={handleSubmit(handleSubmitMessage)}
+          onSubmit={handleSubmit(linkedInSubmitMessage)}
         >
-          <div className="flex w-[100%] items-center gap-2 rounded-full bg-[var(--gray-white-color)] px-4 py-2">
+          <div className="flex w-full items-center gap-2 rounded-full bg-[var(--gray-white-color)] px-4 py-2">
             <textarea
               {...register("message")}
-              className="resize-none overflow-hidden rounded-full bg-transparent focus:outline-none focus:ring-2 focus:ring-[var(--cta-green-color)]"
+              className="w-full resize-none overflow-hidden rounded-full bg-transparent p-2 focus:outline-none focus:ring-2 focus:ring-[var(--cta-green-color)]"
               placeholder="Write a message..."
               id="message"
               onFocus={handleFocus}
