@@ -7,7 +7,6 @@ import pricesPack from "pricesPack.json";
 export default function EntirePrice() {
   const [periods, setPeriods] = useState("year");
   const { monthlyPlan, yearlyPlan } = pricesPack;
-  console.log(pricesPack);
 
   return (
     <div className="flex flex-col items-center gap-5">
