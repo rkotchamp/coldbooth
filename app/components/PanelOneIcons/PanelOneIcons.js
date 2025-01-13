@@ -18,12 +18,12 @@ export default function PanelOneIcons() {
         </span>
       </div>
 
-      {/* <div className="flex h-[var(--iconsActive-height)] w-[var(--iconsActive-width)] items-center rounded-[3px] p-2">
+      <div className="flex h-[var(--iconsActive-height)] w-[var(--iconsActive-width)] items-center rounded-[3px] p-2">
         <FaUser className="text-[30px]" />
       </div>
       <div className="flex h-[var(--iconsActive-height)] w-[var(--iconsActive-width)] items-center rounded-[3px] p-2">
         <MdOutlineDialpad className="text-[30px]" />
-      </div> */}
+      </div>
     </div>
   );
 }
