@@ -1,9 +1,19 @@
 import { NextResponse } from "next/server";
 import clientPromise from "@/app/lib/mongodb";
-import { cookies } from "next/headers";
+import { cookies, headers } from "next/headers";
 import jwt from "jsonwebtoken";
+import { object } from "zod";
 
 export async function GET(request) {
+  console.log("The callback started");
+  // Console logging for debugging
+  const requestLog = {
+    url: request.url,
+    method: request.method,
+    headers: object.fromEntries(request.headers),
+  };
+  console.log("incoming request details:", requestLog);
+
   try {
     console.log("Log request details", request);
     const searchParams = request.nextUrl.searchParams;
@@ -12,11 +22,26 @@ export async function GET(request) {
     const error = searchParams.get("error");
     const error_description = searchParams.get("error_description");
 
+    console.log("OAuth parameters received:", {
+      code,
+      state,
+      error,
+      error_description,
+    });
+
+    const storedState = cookies().get("linkedin_auth_state")?.value;
+    if (!storedState || storedState !== state) {
+      console.error("State mismatch:", { storedState, receivedState: state });
+      return NextResponse.redirect(
+        new URL("/login?error=invalid_state", request.url),
+      );
+    }
+
     const cookieStore = cookies();
     const token = cookieStore.get("token");
     console.log("token from cookies", token);
 
-    if (!token) {
+    if (!token?.value) {
       console.error("No authentication token found");
       return NextResponse.redirect(
         new URL("/login?error=authentication_required", request.url),
@@ -43,6 +68,7 @@ export async function GET(request) {
       {
         method: "POST",
         headers: {
+          // TODO:edit here
           "Content-Type": "application/x-www-form-urlencoded",
         },
         body: new URLSearchParams({
@@ -54,15 +80,20 @@ export async function GET(request) {
         }),
       },
     );
-
+    const tokenRaw = await tokenResponse.text();
+    console, log("token raw", tokenRaw);
     if (!tokenResponse.ok) {
       const errorData = await tokenResponse.json();
       console.error("Token exchange failed:", errorData);
       throw new Error(`Token exchange failed: ${errorData.error_description}`);
     }
     const tokenData = await tokenResponse.json();
-    console.log("linkedIn token data", tokenData);
+    console.log("LinkedIn token received:", {
+      access_token: tokenData.access_token ? "Present" : "Missing",
+      expires_in: tokenData.expires_in,
+    });
 
+    console.log("Fetching LinkedIn profile...");
     const profileResponse = await fetch("https://api.linkedin.com/v2/me", {
       headers: {
         Authorization: `Bearer ${tokenData.access_token}`,
@@ -75,7 +106,12 @@ export async function GET(request) {
       throw new Error("Failed to fetch LinkedIn profile");
     }
     const profileData = await profileResponse.json();
-    console.log("linkedIn profile data", profileData);
+    console.log("LinkedIn profile fetched:", {
+      id: profileData.id,
+      hasData: Object.keys(profileData).length > 0,
+    });
+
+    console.log("Fetching LinkedIn email...");
     const emailResponse = await fetch(
       "https://api.linkedin.com/v2/emailAddress?q=members&projection=(elements*(handle~))",
       {
@@ -113,6 +149,7 @@ export async function GET(request) {
         },
       };
 
+      console.log("db infor", platformData);
       const result = await usersCollection.updateOne(
         { _id: userId },
         {
@@ -121,7 +158,10 @@ export async function GET(request) {
         },
       );
 
-      console.log("MongoDB Update Result:", result);
+      console.log("Database update result:", {
+        matchedCount: result.matchedCount,
+        modifiedCount: result.modifiedCount,
+      });
 
       if (!result.matchedCount) {
         throw new Error("User not found or update failed");
