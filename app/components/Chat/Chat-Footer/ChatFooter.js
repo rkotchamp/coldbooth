@@ -10,7 +10,6 @@ export default function ChatFooter() {
   const { register, handleSubmit, reset, watch } = useForm({
     defaultValues: {
       message: "",
-      recipientId: "",
     },
   });
   const [isTyping, setIsTyping] = useState(false);
@@ -20,37 +19,41 @@ export default function ChatFooter() {
 
   const message = watch("message");
 
-  // Meant for setting up Twilio in the sendSMS route
+  //TODO: Meant for setting up Twilio in the sendSMS route
 
-  // const phoneNumber = process.env.MY_PERSONAL_NUMBER;
-  // const handleTextSubmit = async (data) => {
-  //   setSpinnerLoading(true);
+  const handleTextSubmit = async (data) => {
+    console.log(data);
+    setSpinnerLoading(true);
 
-  //   try {
-  //     const response = await fetch("/api/sendSMS", {
-  //       method: "POST",
-  //       headers: {
-  //         "Content-Type": "application/json",
-  //       },
-  //       body: JSON.stringify({ to: phoneNumber, body: data }),
-  //     });
+    try {
+      const response = await fetch("/api/sendSMS", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          to: process.env.NEXT_PUBLIC_MY_PERSONAL_NUMBER,
+          body: data.message,
+        }),
+      });
 
-  //     const responseData = await response.json();
-  //     if (response.ok) {
-  //       console.log("Message sent", responseData);
-  //     } else {
-  //       throw new Error(responseData.error);
-  //     }
-  //     console.log("The data itself:", data);
-  //   } catch (error) {
-  //   } finally {
-  //     setTimeout(() => {
-  //       setSpinnerLoading(false);
-  //       setIsTyping(false);
-  //     }, 300);
-  //     reset();
-  //   }
-  // };
+      const responseData = await response.json();
+      if (response.ok) {
+        console.log("Message sent", responseData);
+      } else {
+        throw new Error(responseData.error);
+      }
+      console.log("The data itself:", data);
+    } catch (error) {
+      console.error("Error sending SMS:", error);
+    } finally {
+      setTimeout(() => {
+        setSpinnerLoading(false);
+        setIsTyping(false);
+      }, 300);
+      reset();
+    }
+  };
 
   const handleFocus = () => {
     // setIsFocused(true);
@@ -61,33 +64,33 @@ export default function ChatFooter() {
     }
   };
 
-  const linkedInSubmitMessage = async (data) => {
-    setSpinnerLoading(true);
-    try {
-      const response = await fetch("/api/linkedin", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({
-          authorizationCode: "YOUR_AUTHORIZATION_CODE", // Replace with actual authorization code
-          recipientId: data.recipientId, // Send recipient ID
-          message: data.message, // Send message content
-        }),
-      });
+  // const linkedInSubmitMessage = async (data) => {
+  //   setSpinnerLoading(true);
+  //   try {
+  //     const response = await fetch("/api/linkedin", {
+  //       method: "POST",
+  //       headers: {
+  //         "Content-Type": "application/json",
+  //       },
+  //       body: JSON.stringify({
+  //         authorizationCode: "YOUR_AUTHORIZATION_CODE", // Replace with actual authorization code
+  //         recipientId: data.recipientId, // Send recipient ID
+  //         message: data.message, // Send message content
+  //       }),
+  //     });
 
-      const responseData = await response.json();
-      if (response.ok) {
-        console.log("Message sent", responseData);
-      } else {
-        throw new Error(responseData.error);
-      }
-    } catch (error) {
-      console.error("Error sending message:", error);
-    } finally {
-      setSpinnerLoading(false);
-    }
-  };
+  //     const responseData = await response.json();
+  //     if (response.ok) {
+  //       console.log("Message sent", responseData);
+  //     } else {
+  //       throw new Error(responseData.error);
+  //     }
+  //   } catch (error) {
+  //     console.error("Error sending message:", error);
+  //   } finally {
+  //     setSpinnerLoading(false);
+  //   }
+  // };
 
   const handleSubmitMessage = async (data) => {};
 
@@ -111,7 +114,7 @@ export default function ChatFooter() {
   const handleKeyDown = (e) => {
     if (e.key === "Enter" && !e.shiftKey) {
       e.preventDefault();
-      handleSubmit(linkedInSubmitMessage)();
+      handleSubmit(handleTextSubmit)();
     }
   };
 
@@ -146,7 +149,7 @@ export default function ChatFooter() {
 
         <form
           className="flex w-[80%] items-center justify-center gap-5"
-          onSubmit={handleSubmit(linkedInSubmitMessage)}
+          onSubmit={handleSubmit(handleTextSubmit)}
         >
           <div className="flex w-full items-center gap-2 rounded-full bg-[var(--gray-white-color)] px-4 py-2">
             <textarea
