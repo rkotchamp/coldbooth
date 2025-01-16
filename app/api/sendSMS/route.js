@@ -6,7 +6,6 @@ export async function POST(request) {
   const accountToken = process.env.TWILIO_ACCOUNT_TOKEN;
   const twilioPhone = process.env.TWILIO_PHONE;
 
-
   if (!accountSid || !accountToken || !twilioPhone) {
     console, error("Missing Twilio Credentials");
     return NextResponse.json(
@@ -31,6 +30,21 @@ export async function POST(request) {
         },
         { status: 400 },
       );
+    }
+
+    const messageDbResponse = await fetch(
+      `${process.env.NEXT_PUBLIC_BASE_URL}/api/messages`,
+      {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ to, body }),
+      },
+    );
+
+    if (!messageDbResponse.ok) {
+      throw new Error("Failed to save message to database");
     }
 
     console.log("sending Message:", to);
