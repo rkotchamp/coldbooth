@@ -1,10 +1,23 @@
 import { NextResponse } from "next/server";
 
 export async function POST(request) {
-  console.log(request);
   try {
-    const body = await request.text(); // Twilio sends data as `application/x-www-form-urlencoded`
-    const params = new URLSearchParams(body);
+    const contentType = request.headers.get("content-type");
+    console.log("Content-Type", contentType);
+    let params;
+    const rawBody = await request.text();
+    console.log("Raw body:", rawBody);
+
+    if (contentType?.includes("application/json")) {
+      const jsonData = JSON.parse(rawBody);
+      params = new URLSearchParams();
+      for (const [key, value] of Object.entries(jsonData)) {
+        params.append(key, value);
+      }
+    } else {
+      // Handle form-urlencoded data directly
+      params = new URLSearchParams(rawBody);
+    }
 
     const from = params.get("From");
     const to = params.get("To");
@@ -14,6 +27,7 @@ export async function POST(request) {
       from,
       to,
       messageBody,
+      rawBody,
     });
 
     // Process the received message as needed

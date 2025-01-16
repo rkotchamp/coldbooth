@@ -33,8 +33,8 @@ export default function ChatBubble() {
             <div
               className={`max-w-[70%] rounded-lg px-4 py-2 ${
                 message.type === "sent"
-                  ? "bg-[--cta-green-color] text-white"
-                  : "bg-gray-100 text-gray-800"
+                  ? "bg-gray-100 text-gray-800"
+                  : "bg-[--cta-green-color] text-white"
               }`}
             >
               {message.text}
