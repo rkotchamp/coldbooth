@@ -1,9 +1,12 @@
+"use client"
+import { useContext } from "react";
 import { FaUser } from "react-icons/fa6";
 import { IoLogoFacebook } from "react-icons/io5";
 import { RiInstagramFill } from "react-icons/ri";
 import { RiWhatsappFill } from "react-icons/ri";
 import { RiTwitterXFill } from "react-icons/ri";
 import messageData from "message.json";
+import ConversationContext from "@/app/context/ConversationContext"
 
 export default function MessageUsers() {
   const { conversations } = messageData;

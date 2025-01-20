@@ -50,15 +50,19 @@ async function findOrCreateConversation(db, fromNumber, toNumber) {
 
 export async function POST(request) {
   try {
-    const rawBody = await request.text();
+    // Parse form data from Twilio webhook
+    const formData = await request.formData();
+    const from = formData.get("From");
+    const to = formData.get("To");
+    const messageBody = formData.get("Body");
 
-    const formData = parseMultiPartFormData(rawBody);
+    console.log("Received message:", { from, to, messageBody });
 
-    const from = formData.From;
-    const to = formData.To;
-    const messageBody = formData.Body;
+    if (!from || !to || !messageBody) {
+      console.error("Missing required fields:", { from, to, messageBody });
+      return new Response("Missing required fields", { status: 400 });
+    }
 
-    console.log("Parsed message:", { from, to, messageBody });
     const client = await clientPromise;
     const db = client.db(process.env.MONGO_DB);
 
@@ -66,9 +70,9 @@ export async function POST(request) {
 
     const messagesCollection = db.collection("messages");
     const message = {
-      conversationId: conversation._id,
-      senderId: new ObjectId(), // Generate a new ObjectId for sender
-      receiverId: new ObjectId(), // Generate a new ObjectId for receiver
+      conversationId: from, // Using the sender's number as conversationId to match sendSMS
+      senderId: from,
+      receiverId: to,
       platformName: "SMS",
       content: messageBody,
       type: "text",
@@ -78,6 +82,7 @@ export async function POST(request) {
 
     await messagesCollection.insertOne(message);
 
+    // Update conversation with last message
     await db.collection("conversations").updateOne(
       { _id: conversation._id },
       {
@@ -90,10 +95,7 @@ export async function POST(request) {
     );
 
     return new Response(
-      '<?xml version="1.0" encoding="UTF-8"?>' +
-        "<Response>" +
-        "<Message>Message received and stored successfully.</Message>" +
-        "</Response>",
+      '<?xml version="1.0" encoding="UTF-8"?><Response></Response>',
       {
         status: 200,
         headers: {
@@ -102,14 +104,11 @@ export async function POST(request) {
       },
     );
   } catch (error) {
-    console.error("Error receiving message:", error);
+    console.error("Error processing message:", error);
     return new Response(
-      '<?xml version="1.0" encoding="UTF-8"?>' +
-        "<Response>" +
-        "<Message>Message received but processing failed.</Message>" +
-        "</Response>",
+      '<?xml version="1.0" encoding="UTF-8"?><Response></Response>',
       {
-        status: 200,
+        status: 500,
         headers: {
           "Content-Type": "application/xml",
         },
